@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="JoGo Gr4 Division icon">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffd166"/><stop offset="1" stop-color="#f6ad55"/></linearGradient>
+    <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#d8ecff"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
+    <linearGradient id="g3" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#99f6e4"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#f4efe4"/>
+  <circle cx="256" cy="256" r="168" fill="#fffdf7"/>
+  <rect x="116" y="126" width="190" height="190" rx="26" fill="url(#g1)" transform="rotate(-24 211 221)" opacity=".92"/>
+  <rect x="132" y="178" width="186" height="186" rx="24" fill="url(#g2)" transform="rotate(-10 225 271)" opacity=".92"/>
+  <rect x="186" y="166" width="194" height="194" rx="28" fill="#ffb180" transform="rotate(-29 283 263)" opacity=".95"/>
+  <rect x="232" y="218" width="198" height="198" rx="30" fill="url(#g3)" transform="rotate(-18 331 317)"/>
+  <text x="256" y="292" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="800" fill="#23623d">÷</text>
+</svg>
