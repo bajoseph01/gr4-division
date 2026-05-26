@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Gr4 Division</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Gr4 Division">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#2f7d4f">
   <style>
     :root {
@@ -153,6 +151,45 @@
       background: #f0f2f4;
       color: #263238;
     }
+
+    .sample-bank {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .sample-band {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .sample-label {
+      color: #475467;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .sample-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .sample-buttons button {
+      min-width: 72px;
+      min-height: 44px;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.05);
+    }
+
+    .difficulty-1 { background: #dcfce7; color: #143d25; }
+    .difficulty-2 { background: #bbf7d0; color: #143d25; }
+    .difficulty-3 { background: #fef3c7; color: #3f3208; }
+    .difficulty-4 { background: #fed7aa; color: #4a2505; }
+    .difficulty-5 { background: #fecaca; color: #5f1515; }
+    .difficulty-6 { background: #dc2626; color: white; }
 
     .mode-note {
       margin: 0 0 8px;
@@ -298,7 +335,7 @@
 
     .formal-work {
       border-left: 3px solid transparent;
-      padding-left: var(--house-pad);
+      padding-left: calc(var(--house-pad) + clamp(22px, 4vw, 34px));
       padding-right: 10px;
       margin-top: -8px;
       font-size: clamp(2rem, 5.5vw, 4rem);
@@ -311,6 +348,18 @@
       justify-content: center;
       min-height: clamp(44px, 6vw, 62px);
       align-items: center;
+      position: relative;
+    }
+
+    .work-number-row.has-minus::before {
+      content: "-";
+      position: absolute;
+      left: calc(-0.62 * var(--cell-size));
+      top: 50%;
+      transform: translateY(-52%);
+      color: #111;
+      font-size: 0.85em;
+      font-weight: 800;
     }
 
     .work-cell {
@@ -334,6 +383,20 @@
     .work-cell.brought-down {
       color: #111;
       font-weight: 700;
+      position: relative;
+    }
+
+    .work-cell.brought-down::before {
+      content: "↓";
+      position: absolute;
+      top: -1.08em;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(47, 125, 79, 0.6);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.72em;
+      font-weight: 900;
+      line-height: 1;
     }
 
     .work-rule {
@@ -341,6 +404,18 @@
       background: #111;
       margin: 2px 0 5px;
       justify-self: stretch;
+    }
+
+    .work-rule.start {
+      margin-left: 0;
+    }
+
+    .work-rule.middle {
+      margin-left: calc(-1 * var(--cell-gap));
+    }
+
+    .work-rule.end {
+      margin-left: calc(-1 * var(--cell-gap));
     }
 
     .working-lines {
@@ -542,6 +617,13 @@
       .panel { padding: 12px; }
       .controls { grid-template-columns: 1fr; }
       .sample-row button, .controls button { width: 100%; }
+      .sample-band {
+        grid-template-columns: 1fr;
+      }
+      .sample-buttons button {
+        min-width: 0;
+        flex: 1 1 84px;
+      }
       .q-box { width: 38px; }
     }
   </style>
@@ -556,7 +638,7 @@
     <section class="shell">
       <div class="panel">
         <div class="top-actions">
-          <button class="quiet-button" type="button" onclick="toggleTeacherDrawer()">Teacher</button>
+          <button class="quiet-button" type="button" onclick="toggleTeacherDrawer()">SETUP</button>
           <button class="quiet-button" type="button" onclick="toggleScratchpad()">Scratchpad</button>
         </div>
 
@@ -573,11 +655,47 @@
               <button class="secondary" type="button" onclick="resetLongWork()">Reset</button>
               <button class="secondary" type="button" onclick="revealLongStep()">Reveal</button>
             </div>
-            <div class="sample-row" aria-label="Long division sample problems">
-              <button type="button" onclick="setLongSample('84 / 4')">84 / 4</button>
-              <button type="button" onclick="setLongSample('96 / 3')">96 / 3</button>
-              <button type="button" onclick="setLongSample('156 / 3')">156 / 3</button>
-              <button type="button" onclick="setLongSample('137 / 5')">137 / 5</button>
+            <div class="sample-bank" aria-label="Long division sample problems">
+              <div class="sample-band">
+                <div class="sample-label">2 digit exact</div>
+                <div class="sample-buttons">
+                  <button class="difficulty-1" type="button" onclick="setLongSample('48 / 2')">48 / 2</button>
+                  <button class="difficulty-1" type="button" onclick="setLongSample('84 / 4')">84 / 4</button>
+                  <button class="difficulty-1" type="button" onclick="setLongSample('96 / 3')">96 / 3</button>
+                  <button class="difficulty-2" type="button" onclick="setLongSample('75 / 5')">75 / 5</button>
+                  <button class="difficulty-2" type="button" onclick="setLongSample('72 / 6')">72 / 6</button>
+                </div>
+              </div>
+              <div class="sample-band">
+                <div class="sample-label">3 digit exact</div>
+                <div class="sample-buttons">
+                  <button class="difficulty-2" type="button" onclick="setLongSample('132 / 6')">132 / 6</button>
+                  <button class="difficulty-2" type="button" onclick="setLongSample('156 / 3')">156 / 3</button>
+                  <button class="difficulty-3" type="button" onclick="setLongSample('248 / 4')">248 / 4</button>
+                  <button class="difficulty-3" type="button" onclick="setLongSample('426 / 3')">426 / 3</button>
+                  <button class="difficulty-3" type="button" onclick="setLongSample('864 / 4')">864 / 4</button>
+                </div>
+              </div>
+              <div class="sample-band">
+                <div class="sample-label">2 digit rem.</div>
+                <div class="sample-buttons">
+                  <button class="difficulty-4" type="button" onclick="setLongSample('85 / 4')">85 / 4</button>
+                  <button class="difficulty-4" type="button" onclick="setLongSample('74 / 3')">74 / 3</button>
+                  <button class="difficulty-4" type="button" onclick="setLongSample('59 / 5')">59 / 5</button>
+                  <button class="difficulty-5" type="button" onclick="setLongSample('97 / 6')">97 / 6</button>
+                  <button class="difficulty-5" type="button" onclick="setLongSample('79 / 4')">79 / 4</button>
+                </div>
+              </div>
+              <div class="sample-band">
+                <div class="sample-label">3 digit rem.</div>
+                <div class="sample-buttons">
+                  <button class="difficulty-5" type="button" onclick="setLongSample('137 / 5')">137 / 5</button>
+                  <button class="difficulty-5" type="button" onclick="setLongSample('258 / 4')">258 / 4</button>
+                  <button class="difficulty-5" type="button" onclick="setLongSample('347 / 6')">347 / 6</button>
+                  <button class="difficulty-6" type="button" onclick="setLongSample('529 / 7')">529 / 7</button>
+                  <button class="difficulty-6" type="button" onclick="setLongSample('746 / 9')">746 / 9</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -830,14 +948,17 @@
 
     function digitCellsForValue(value, startIndex, endIndex, totalDigits) {
       const cells = Array(totalDigits).fill("");
-      const span = endIndex - startIndex + 1;
-      const digits = String(value).padStart(span, " ").split("");
-      const firstColumn = Math.max(startIndex, endIndex - digits.length + 1);
+      const digits = String(value).split("");
+      const firstColumn = Math.max(0, endIndex - digits.length + 1);
       digits.forEach((digit, offset) => {
         const column = firstColumn + offset;
         if (column >= 0 && column < totalDigits && digit !== " ") cells[column] = digit;
       });
       return cells;
+    }
+
+    function firstColumnForValue(value, endIndex) {
+      return Math.max(0, endIndex - String(value).length + 1);
     }
 
     function renderNumberRow(cells, extra = "") {
@@ -850,8 +971,12 @@
 
     function renderRuleRow(startIndex, endIndex, totalDigits) {
       const cells = Array(totalDigits).fill("");
-      cells[startIndex] = `<span class="work-rule"></span>`;
-      for (let index = startIndex + 1; index <= endIndex; index += 1) cells[index] = `<span class="work-rule"></span>`;
+      for (let index = startIndex; index <= endIndex; index += 1) {
+        let position = "middle";
+        if (index === startIndex) position = "start";
+        if (index === endIndex) position = index === startIndex ? "single" : "end";
+        cells[index] = `<span class="work-rule ${position}"></span>`;
+      }
       return `<div class="work-number-row">${cells.map(cell => cell || `<span class="work-cell blank">0</span>`).join("")}</div>`;
     }
 
@@ -859,18 +984,34 @@
       return value === 0 ? { value: ".", className: "placeholder-dot" } : String(value);
     }
 
+    function remainderCellsForStep(step, totalDigits) {
+      const cells = Array(totalDigits).fill("");
+      if (step.remainder === 0) {
+        const firstColumn = firstColumnForValue(step.partial, step.endIndex);
+        for (let index = firstColumn; index <= step.endIndex; index += 1) {
+          cells[index] = { value: ".", className: "placeholder-dot" };
+        }
+        return cells;
+      }
+
+      return digitCellsForValue(step.remainder, step.startIndex, step.endIndex, totalDigits);
+    }
+
     function renderFormalWork(totalDigits) {
       const rows = [];
 
       longProblem.steps.forEach((step, stepIndex) => {
         if (isLongPartVisible(stepIndex, "multiply")) {
-          rows.push(renderNumberRow(digitCellsForValue(step.product, step.startIndex, step.endIndex, totalDigits)));
-          rows.push(renderRuleRow(step.startIndex, step.endIndex, totalDigits));
+          rows.push(renderNumberRow(digitCellsForValue(step.product, step.startIndex, step.endIndex, totalDigits), 'class="has-minus"'));
+          const ruleStart = Math.min(
+            firstColumnForValue(step.partial, step.endIndex),
+            firstColumnForValue(step.product, step.endIndex)
+          );
+          rows.push(renderRuleRow(ruleStart, step.endIndex, totalDigits));
         }
 
         if (isLongPartVisible(stepIndex, "subtract")) {
-          const remainderCells = Array(totalDigits).fill("");
-          remainderCells[step.endIndex] = remainderCell(step.remainder);
+          const remainderCells = remainderCellsForStep(step, totalDigits);
           if (isLongPartVisible(stepIndex, "bring") && step.bringDown !== "") {
             remainderCells[step.endIndex + 1] = { value: step.bringDown, className: "brought-down" };
           }
