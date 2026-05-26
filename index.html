@@ -1,48 +1,1226 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-  <title>JoGo Gr4 Division</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <title>Gr4 Division</title>
   <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Gr4 Division">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#2f7d4f">
   <style>
-    :root{--green:#2f7d4f;--dark:#23623d;--paper:#fffdf7;--soft:#f4efe4;--ink:#252525;--muted:#667085;--blue:#d8ecff;--yellow:#ffd166;--red:#d94f45;--line:#ded6c8}*{box-sizing:border-box}html,body{margin:0;min-height:100%;overscroll-behavior-y:contain}body{font-family:Arial,Helvetica,sans-serif;background:var(--soft);color:var(--ink);padding:14px}.app{width:min(1040px,100%);margin:auto}.brand{text-align:center;margin:8px 0 14px}.brand h1{margin:0;font-size:clamp(1.7rem,4vw,2.4rem)}.brand span{color:#d99018}.brand p{margin:4px 0 0;color:var(--muted)}.panel,.scratch{background:rgba(255,255,255,.98);border:1px solid rgba(0,0,0,.08);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.08);padding:14px}.top{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px;flex-wrap:wrap}button{border:0;border-radius:8px;padding:11px 14px;min-height:42px;background:#e8ece9;color:var(--ink);font-weight:700;cursor:pointer}.primary,.active{background:var(--green);color:#fff}.secondary{background:#f0f2f4}.quiet{background:#ece8de}.drawer{border:1px solid #e4ddd0;border-radius:10px;background:#fbfaf6;padding:12px;margin-bottom:12px}.hidden{display:none!important}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.controls{display:grid;grid-template-columns:minmax(180px,1fr) auto auto auto;gap:8px;align-items:center;margin-bottom:12px}input{border:1px solid #c9c9c9;border-radius:8px;min-height:42px;padding:9px 10px;font-size:1rem;background:#fff}.samples{display:grid;gap:8px}.sampleband{display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center}.samplelabel{color:#475467;font-size:.82rem;font-weight:700}.samplebuttons{display:flex;flex-wrap:wrap;gap:8px}.samplebuttons button{min-width:72px}.d1{background:#dcfce7;color:#143d25}.d2{background:#bbf7d0;color:#143d25}.d3{background:#fef3c7;color:#3f3208}.d4{background:#fed7aa;color:#4a2505}.d5{background:#fecaca;color:#5f1515}.d6{background:#dc2626;color:#fff}.work{background:var(--paper);border:1px solid rgba(0,0,0,.06);border-radius:12px;padding:clamp(14px,3vw,28px);min-height:520px;overflow-x:auto}.longgrid{display:grid;grid-template-columns:minmax(320px,.95fr) minmax(300px,1.05fr);gap:clamp(16px,3vw,30px);align-items:start}.board{font-family:"Courier New",monospace;font-size:clamp(2.2rem,5.5vw,4.6rem);width:max-content;max-width:100%;margin:auto;display:grid;grid-template-columns:auto auto}.divisor{padding-right:8px;margin-top:96px}.house{--cell:clamp(42px,6vw,60px);--gap:10px;--pad:13px}.quotline{min-height:88px;border-bottom:3px solid #111;padding-left:var(--pad);display:grid;grid-template-columns:repeat(var(--n),var(--cell));gap:var(--gap);align-items:end;justify-content:center}.divline{border-left:3px solid #111;padding:8px 10px 0 var(--pad);display:flex;gap:var(--gap);justify-content:center}.digitwrap{display:grid;gap:2px;justify-items:center}.placelabel{font-family:Arial,sans-serif;font-size:.75rem;color:var(--muted);line-height:1}.current{background:var(--yellow);border-radius:7px;padding:0 5px}.cell{display:inline-grid;place-items:center;width:var(--cell);min-height:60px}.empty{color:transparent}.formal{border-left:3px solid transparent;padding-left:var(--pad);padding-right:10px;margin-top:-8px;font-size:clamp(1.9rem,4.8vw,3.8rem)}.row{display:grid;grid-template-columns:repeat(var(--n),var(--cell));gap:var(--gap);justify-content:center;min-height:54px;align-items:center}.workcell{display:grid;place-items:center;line-height:1}.blank{color:transparent}.dot{color:#6b7280;font-size:.7em;align-self:end}.down{font-weight:700}.rule{height:3px;background:#111;align-self:center}.lines{max-height:190px;overflow:auto;margin-bottom:12px;background:rgba(255,255,255,.7);border:1px solid #ebe3d5;border-radius:10px}.lines div{border-bottom:1px solid #ebe3d5;padding:5px 10px}.card{background:#fff;border:1px solid #e5dfd0;border-radius:12px;padding:clamp(14px,3vw,24px);margin:auto;width:min(620px,100%);text-align:center}.card.active{border-color:var(--green);box-shadow:inset 4px 0 0 var(--green)}.title{margin:0 0 14px;font-size:clamp(1.35rem,3vw,2.1rem);font-weight:700}.prompt{margin:0 0 16px;color:#344054;font-size:clamp(1.05rem,2.2vw,1.35rem)}.field{width:min(260px,100%);margin:auto}.field label{display:block;font-size:.95rem;font-weight:700;color:#475467;margin-bottom:6px}.field input,.qbox{width:100%;text-align:center;font-size:2rem;font-weight:700;min-height:58px;background:var(--blue);border-color:#7fb3e8}.actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}.feedback{min-height:28px;margin-top:14px;font-weight:700;text-align:center;font-size:clamp(1rem,2vw,1.2rem)}.good{color:var(--dark)}.bad{color:var(--red)}.shortgrid{display:flex;justify-content:center;align-items:flex-end;font-family:"Courier New",monospace;font-size:clamp(1.8rem,5vw,3rem);margin:8px 0 18px}.shorthouse{display:grid;grid-template-rows:auto auto}.shortq{border-bottom:3px solid #111;border-left:3px solid transparent;padding-left:12px;display:flex;gap:8px;min-height:54px;align-items:end}.shortdiv{border-left:3px solid #111;padding:8px 10px 0 12px;display:flex;gap:8px}.shortdigit{position:relative;min-width:38px;text-align:center}.carry{position:absolute;top:-22px;left:-8px;width:34px;min-height:30px;padding:0;text-align:center;color:#b42318;background:#fff0f0;font-size:1rem;font-weight:700}.scratch{margin-top:12px}.scratch h2{font-size:1.05rem;margin:0 0 8px;text-align:center}.tools{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:8px}.tools button{min-height:36px;padding:8px 10px;font-size:.85rem}canvas{width:100%;height:300px;border:1px solid #cfcfcf;border-radius:8px;background:#fff;touch-action:none;cursor:crosshair}.vocablink{display:inline-block;margin-top:8px;color:var(--green);font-weight:700}@media(max-width:850px){body{padding:10px}.longgrid{grid-template-columns:1fr}.controls{grid-template-columns:1fr 1fr}.controls input{grid-column:1/-1}canvas{height:320px}}@media(max-width:520px){.panel{padding:12px}.controls{grid-template-columns:1fr}.sampleband{grid-template-columns:1fr}.samplebuttons button{flex:1 1 84px}.qbox{width:38px}.top button{flex:1 1 110px}}
+    :root {
+      --green: #2f7d4f;
+      --green-dark: #23623d;
+      --yellow: #ffd166;
+      --blue: #d8ecff;
+      --red: #d94f45;
+      --ink: #252525;
+      --muted: #667085;
+      --paper: #fffdf7;
+      --line: #ded6c8;
+      --soft: #f4efe4;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      overscroll-behavior-y: contain;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--soft);
+      padding: 16px;
+    }
+
+    .app {
+      width: min(1040px, 100%);
+      margin: 0 auto;
+    }
+
+    .brand {
+      text-align: center;
+      margin: 8px 0 14px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 4vw, 2.25rem);
+      letter-spacing: 0;
+    }
+
+    .brand span { color: #d99018; }
+
+    .brand p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .shell {
+      display: block;
+    }
+
+    .panel, .scratchpad {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 8px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+    }
+
+    .panel { padding: 14px; }
+
+    .top-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .quiet-button {
+      background: #ece8de;
+      color: #38423b;
+      min-height: 38px;
+      padding: 8px 12px;
+    }
+
+    .teacher-drawer {
+      border: 1px solid #e4ddd0;
+      border-radius: 8px;
+      background: #fbfaf6;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .tab-button, button {
+      border: 0;
+      border-radius: 6px;
+      padding: 11px 14px;
+      background: #e8ece9;
+      color: var(--ink);
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 42px;
+    }
+
+    .tab-button.active, .primary {
+      background: var(--green);
+      color: white;
+    }
+
+    button:hover { filter: brightness(0.96); }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto auto auto;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    input[type="text"], input[type="number"] {
+      border: 1px solid #c9c9c9;
+      border-radius: 6px;
+      min-height: 42px;
+      padding: 9px 10px;
+      font-size: 1rem;
+      background: white;
+    }
+
+    .sample-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 8px 0 0;
+    }
+
+    .sample-row button, .secondary {
+      background: #f0f2f4;
+      color: #263238;
+    }
+
+    .mode-note {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .work-area {
+      background: var(--paper);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 8px;
+      padding: clamp(14px, 3vw, 28px);
+      min-height: 520px;
+      overflow-x: auto;
+    }
+
+    .long-work-area {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(300px, 1.05fr);
+      gap: clamp(16px, 3vw, 30px);
+      align-items: start;
+      overflow: visible;
+    }
+
+    #longBoard {
+      position: sticky;
+      top: 10px;
+      align-self: start;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    #longStepArea {
+      align-self: start;
+    }
+
+    #longFeedback {
+      grid-column: 2;
+    }
+
+    .division-board {
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: center;
+      align-items: start;
+      gap: 0;
+      font-family: "Courier New", monospace;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      margin: 8px auto 28px;
+      width: max-content;
+      max-width: 100%;
+      --quotient-height: clamp(66px, 10vw, 96px);
+    }
+
+    .long-work-area .division-board {
+      font-size: clamp(2.1rem, 4.8vw, 4.4rem);
+      margin-top: 0;
+    }
+
+    .divisor {
+      padding: 0 8px 9px 0;
+      line-height: 1;
+    }
+
+    .division-board > .divisor {
+      margin-top: calc(var(--quotient-height) + clamp(26px, 4vw, 40px));
+      padding: 0 8px 0 0;
+    }
+
+    .house {
+      min-width: 180px;
+      --cell-size: clamp(44px, 7vw, 64px);
+      --cell-gap: 12px;
+      --house-pad: 13px;
+    }
+
+    .long-work-area .house {
+      --cell-size: clamp(40px, 5.5vw, 58px);
+    }
+
+    .quotient-line {
+      min-height: var(--quotient-height);
+      border-bottom: 3px solid #111;
+      padding-left: var(--house-pad);
+      display: grid;
+      grid-template-columns: repeat(var(--digit-count), var(--cell-size));
+      justify-content: center;
+      gap: var(--cell-gap);
+      align-items: end;
+    }
+
+    .dividend-line {
+      border-left: 3px solid #111;
+      padding: 8px 10px 0 var(--house-pad);
+      display: flex;
+      gap: var(--cell-gap);
+      justify-content: center;
+      min-height: clamp(70px, 10vw, 100px);
+    }
+
+    .digit-wrap {
+      display: grid;
+      gap: 2px;
+      justify-items: center;
+      min-width: 32px;
+    }
+
+    .place-label {
+      font-size: 0.8rem;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--muted);
+      line-height: 1;
+    }
+
+    .current-digit {
+      background: var(--yellow);
+      border-radius: 6px;
+      padding: 0 5px;
+    }
+
+    .q-box {
+      width: clamp(44px, 7vw, 64px);
+      height: clamp(50px, 7vw, 70px);
+      text-align: center;
+      font-family: "Courier New", monospace;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      padding: 0;
+      border-color: #7fb3e8;
+      background: var(--blue);
+    }
+
+    .board-value {
+      display: inline-grid;
+      place-items: center;
+      width: var(--cell-size);
+      height: clamp(50px, 7vw, 70px);
+      color: #111;
+    }
+
+    .board-value.empty {
+      color: transparent;
+    }
+
+    .formal-work {
+      border-left: 3px solid transparent;
+      padding-left: var(--house-pad);
+      padding-right: 10px;
+      margin-top: -8px;
+      font-size: clamp(2rem, 5.5vw, 4rem);
+    }
+
+    .work-number-row {
+      display: grid;
+      grid-template-columns: repeat(var(--digit-count), var(--cell-size));
+      gap: var(--cell-gap);
+      justify-content: center;
+      min-height: clamp(44px, 6vw, 62px);
+      align-items: center;
+    }
+
+    .work-cell {
+      display: grid;
+      place-items: center;
+      min-width: 0;
+      line-height: 1;
+    }
+
+    .work-cell.blank {
+      color: transparent;
+    }
+
+    .work-cell.placeholder-dot {
+      color: #6b7280;
+      font-size: 0.7em;
+      align-self: end;
+      padding-bottom: 0.12em;
+    }
+
+    .work-cell.brought-down {
+      color: #111;
+      font-weight: 700;
+    }
+
+    .work-rule {
+      height: 3px;
+      background: #111;
+      margin: 2px 0 5px;
+      justify-self: stretch;
+    }
+
+    .working-lines {
+      width: 100%;
+      max-height: 190px;
+      overflow-y: auto;
+      margin: 0 0 12px;
+      color: #3a3a3a;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid #ebe3d5;
+      border-radius: 8px;
+      font-size: clamp(0.95rem, 1.7vw, 1.2rem);
+      line-height: 1.5;
+    }
+
+    .working-lines div {
+      border-bottom: 1px solid #ebe3d5;
+      padding: 5px 10px;
+    }
+
+    .working-lines div:last-child {
+      border-bottom: 0;
+    }
+
+    .step-card {
+      background: white;
+      border: 1px solid #e5dfd0;
+      border-radius: 8px;
+      padding: clamp(14px, 3vw, 24px);
+      margin: 0 auto;
+      width: min(620px, 100%);
+      text-align: center;
+    }
+
+    .step-card.active {
+      border-color: var(--green);
+      box-shadow: inset 4px 0 0 var(--green);
+    }
+
+    .step-title {
+      margin: 0 0 14px;
+      font-size: clamp(1.35rem, 3vw, 2.1rem);
+      font-weight: 700;
+    }
+
+    .step-prompt {
+      margin: 0 0 16px;
+      color: #344054;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    }
+
+    .step-grid {
+      display: block;
+      width: min(260px, 100%);
+      margin: 0 auto;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #475467;
+      margin-bottom: 6px;
+    }
+
+    .field input {
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      min-height: 58px;
+    }
+
+    .step-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .feedback {
+      min-height: 28px;
+      margin-top: 14px;
+      font-weight: 700;
+      text-align: center;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .feedback.good { color: var(--green-dark); }
+    .feedback.bad { color: var(--red); }
+
+    .short-grid {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      font-family: "Courier New", monospace;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      margin: 8px 0 18px;
+    }
+
+    .short-house {
+      display: grid;
+      grid-template-rows: auto auto;
+    }
+
+    .short-quotient {
+      border-bottom: 3px solid #111;
+      border-left: 3px solid transparent;
+      padding-left: 12px;
+      display: flex;
+      gap: 8px;
+      min-height: 54px;
+      align-items: end;
+    }
+
+    .short-dividend {
+      border-left: 3px solid #111;
+      padding: 8px 10px 0 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .short-digit {
+      position: relative;
+      min-width: 38px;
+      text-align: center;
+    }
+
+    .carry {
+      position: absolute;
+      top: -22px;
+      left: -8px;
+      width: 34px;
+      min-height: 30px;
+      padding: 0;
+      text-align: center;
+      color: #b42318;
+      background: #fff0f0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .scratchpad {
+      padding: 12px;
+      margin-top: 12px;
+    }
+
+    .scratchpad h2 {
+      font-size: 1.05rem;
+      margin: 0 0 8px;
+      text-align: center;
+    }
+
+    .tools {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .tools button {
+      min-height: 36px;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+    }
+
+    canvas {
+      width: 100%;
+      height: 300px;
+      border: 1px solid #cfcfcf;
+      border-radius: 6px;
+      background: white;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 850px) {
+      body { padding: 10px; }
+      .long-work-area {
+        grid-template-columns: 1fr;
+        overflow-x: auto;
+      }
+      #longBoard {
+        position: static;
+      }
+      #longFeedback {
+        grid-column: 1;
+      }
+      .controls { grid-template-columns: 1fr 1fr; }
+      .controls input { grid-column: 1 / -1; }
+      canvas { height: 320px; }
+    }
+
+    @media (max-width: 520px) {
+      .panel { padding: 12px; }
+      .controls { grid-template-columns: 1fr; }
+      .sample-row button, .controls button { width: 100%; }
+      .q-box { width: 38px; }
+    }
   </style>
 </head>
 <body>
-<main class="app">
-<header class="brand"><h1>Jo<span>Go</span> Gr4 Division</h1><p>Long division first. Short division after the method makes sense.</p><a class="vocablink" href="./DivisionVocab.html">Open division vocabulary helper</a></header>
-<section class="panel">
-<div class="top"><button class="quiet" onclick="toggle('teacher')">SETUP</button><button class="quiet" onclick="toggleScratch()">Scratchpad</button></div>
-<div id="teacher" class="drawer hidden">
-<nav class="tabs"><button id="longTab" class="active" onclick="switchTab('long')">Long Division</button><button id="shortTab" onclick="switchTab('short')">Short Division</button></nav>
-<div id="longControls"><div class="controls"><input id="longEquation" value="84 / 4" onkeydown="if(event.key==='Enter')setupLong()"><button class="primary" onclick="setupLong()">Set Up</button><button class="secondary" onclick="resetLong()">Reset</button><button class="secondary" onclick="revealLong()">Reveal</button></div><div class="samples"><div class="sampleband"><div class="samplelabel">2 digit exact</div><div class="samplebuttons"><button class="d1" onclick="sampleLong('48 / 2')">48 / 2</button><button class="d1" onclick="sampleLong('84 / 4')">84 / 4</button><button class="d2" onclick="sampleLong('72 / 6')">72 / 6</button></div></div><div class="sampleband"><div class="samplelabel">3 digit exact</div><div class="samplebuttons"><button class="d2" onclick="sampleLong('132 / 6')">132 / 6</button><button class="d3" onclick="sampleLong('248 / 4')">248 / 4</button><button class="d3" onclick="sampleLong('426 / 3')">426 / 3</button></div></div><div class="sampleband"><div class="samplelabel">remainders</div><div class="samplebuttons"><button class="d4" onclick="sampleLong('85 / 4')">85 / 4</button><button class="d5" onclick="sampleLong('137 / 5')">137 / 5</button><button class="d6" onclick="sampleLong('746 / 9')">746 / 9</button></div></div></div></div>
-<div id="shortControls" class="hidden"><div class="controls"><input id="shortEquation" value="852 / 8" onkeydown="if(event.key==='Enter')setupShort()"><button class="primary" onclick="setupShort()">Set Up</button><button class="secondary" onclick="checkShort()">Check</button><button class="secondary" onclick="revealShort()">Reveal</button></div><div class="samplebuttons"><button onclick="sampleShort('246 / 2')">246 / 2</button><button onclick="sampleShort('852 / 8')">852 / 8</button><button onclick="sampleShort('936 / 3')">936 / 3</button><button onclick="sampleShort('725 / 6')">725 / 6</button></div></div>
-</div>
-<section id="longPanel"><div class="work longgrid"><div id="longBoard"></div><div id="longStep"></div><div id="longFeedback" class="feedback"></div></div></section>
-<section id="shortPanel" class="hidden"><div class="work"><div id="shortBoard"></div><div id="shortFeedback" class="feedback"></div></div></section>
-</section>
-<aside id="scratch" class="scratch hidden"><h2>Scratchpad</h2><div class="tools"><button id="pencilBtn" class="primary" onclick="setTool('pencil')">Pencil</button><button id="eraserBtn" onclick="setTool('eraser')">Eraser</button><button onclick="undoCanvas()">Undo</button><button onclick="redoCanvas()">Redo</button><button onclick="clearCanvas()">Clear</button></div><canvas id="canvas" width="320" height="430"></canvas></aside>
-</main>
-<script>
-let tab='long',lp=null,li=0,pi=0,ready=false,sp=null,canvas,ctx,drawing=false,tool='pencil',hist=[],hi=-1;
-function parse(v){let p=v.split('/').map(x=>x.trim()),a=Number(p[0]),b=Number(p[1]);if(p.length!==2)return{error:'Use this format: 84 / 4'};if(!Number.isInteger(a)||!Number.isInteger(b))return{error:'Use whole numbers only.'};if(a<0||b<=0)return{error:'Dividend must be 0 or more. Divisor must be bigger than 0.'};if(b>12)return{error:'For Grade 4 practice, keep the divisor 12 or less.'};return{dividend:a,divisor:b}}
-function toggle(id){document.getElementById(id).classList.toggle('hidden')}function toggleScratch(){toggle('scratch');resizeCanvas()}function switchTab(t){tab=t;longPanel.classList.toggle('hidden',t!=='long');shortPanel.classList.toggle('hidden',t!=='short');longControls.classList.toggle('hidden',t!=='long');shortControls.classList.toggle('hidden',t!=='short');longTab.classList.toggle('active',t==='long');shortTab.classList.toggle('active',t==='short')}function sampleLong(s){longEquation.value=s;setupLong()}function sampleShort(s){shortEquation.value=s;setupShort()}
-function label(i,n){return(['ones','tens','hundreds','thousands','ten thousands'][n-i-1]||'')}function steps(a,b){let ds=String(a).split('').map(Number),out=[],part=0,start=0;ds.forEach((d,i)=>{part=part*10+d;let last=i===ds.length-1;if(part>=b||last){let q=Math.floor(part/b),prod=q*b,rem=part-prod;out.push({startIndex:start,endIndex:i,partial:part,qDigit:q,product:prod,remainder:rem,bringDown:last?'':String(ds[i+1])});part=rem;start=i+1}});return out}
-function setupLong(){let x=parse(longEquation.value),f=longFeedback;f.textContent='';f.className='feedback';if(x.error){longBoard.innerHTML=longStep.innerHTML='';f.textContent=x.error;f.classList.add('bad');return}lp={dividend:x.dividend,divisor:x.divisor,steps:steps(x.dividend,x.divisor)};li=0;pi=0;ready=false;renderLong()}function resetLong(){if(!lp)return setupLong();li=0;pi=0;ready=false;renderLong()}function parts(s){return s.bringDown===''?['divide','multiply','subtract']:['divide','multiply','subtract','bring']}function cur(){return lp.steps[li]?parts(lp.steps[li])[pi]:null}
-function detail(s,p){return{divide:{title:'Divide',prompt:`How many ${lp.divisor}s fit into ${s.partial}?`,label:'Quotient digit',answer:String(s.qDigit)},multiply:{title:'Multiply',prompt:`${lp.divisor} x ${s.qDigit} = ?`,label:'Product',answer:String(s.product)},subtract:{title:'Subtract',prompt:`${s.partial} - ${s.product} = ?`,label:'Remainder',answer:String(s.remainder)},bring:{title:'Bring Down',prompt:'Which digit comes down next?',label:'Next digit',answer:s.bringDown}}[p]}function line(s,p){return{divide:`${lp.divisor} into ${s.partial} = ${s.qDigit}`,multiply:`${lp.divisor} x ${s.qDigit} = ${s.product}`,subtract:`${s.partial} - ${s.product} = ${s.remainder===0?'.':s.remainder}`,bring:`Bring down ${s.bringDown}`}[p]}
-function visible(si,p){let ps=parts(lp.steps[si]),c=0;if(si<li)c=ps.length;if(si===li)c=pi+(ready?1:0);return ps.slice(0,c).includes(p)}function lines(){let a=[];lp.steps.forEach((s,si)=>parts(s).forEach(p=>{if(visible(si,p))a.push(line(s,p))}));return a.length?`<div class="lines">${a.map(x=>`<div>${x}</div>`).join('')}</div>`:''}
-function cells(val,start,end,n){let c=Array(n).fill(''),span=end-start+1,ds=String(val).padStart(span,' ').split(''),first=Math.max(start,end-ds.length+1);ds.forEach((d,o)=>{let col=first+o;if(col>=0&&col<n&&d!==' ')c[col]=d});return c}function numrow(c,n){return`<div class="row" style="--n:${n}">${c.map(x=>{let v=typeof x==='object'?x.value:x,cl=typeof x==='object'?x.className:'';return`<span class="workcell ${v===''?'blank':''} ${cl}">${v||'0'}</span>`}).join('')}</div>`}function ruler(s,e,n){let c=Array(n).fill('');for(let i=s;i<=e;i++)c[i]='<span class="rule"></span>';return`<div class="row" style="--n:${n}">${c.map(x=>x||'<span class="workcell blank">0</span>').join('')}</div>`}function formal(n){let r=[];lp.steps.forEach((s,si)=>{if(visible(si,'multiply')){r.push(numrow(cells(s.product,s.startIndex,s.endIndex,n),n));r.push(ruler(s.startIndex,s.endIndex,n))}if(visible(si,'subtract')){let c=Array(n).fill('');c[s.endIndex]=s.remainder===0?{value:'.',className:'dot'}:String(s.remainder);if(visible(si,'bring')&&s.bringDown)c[s.endIndex+1]={value:s.bringDown,className:'down'};r.push(numrow(c,n))}});return`<div class="formal">${r.join('')}</div>`}
-function renderLong(){let ds=String(lp.dividend).split(''),qc=Array(ds.length).fill(''),act=lp.steps[li];lp.steps.forEach((s,i)=>{if(i<li||(i===li&&(pi>0||(ready&&cur()==='divide'))))qc[s.endIndex]=String(s.qDigit)});longBoard.innerHTML=`<div class="board"><div class="divisor">${lp.divisor}</div><div class="house"><div class="quotline" style="--n:${ds.length}">${qc.map(d=>`<span class="cell ${d===''?'empty':''}">${d||'0'}</span>`).join('')}</div><div class="divline">${ds.map((d,i)=>`<div class="digitwrap"><span class="placelabel">${label(i,ds.length)}</span><span class="${act&&i>=act.startIndex&&i<=act.endIndex?'current':''}">${d}</span></div>`).join('')}</div>${formal(ds.length)}</div></div>`;if(!act){let q=Math.floor(lp.dividend/lp.divisor),r=lp.dividend%lp.divisor;longStep.innerHTML=`${lines()}<div class="card active"><p class="title">Complete: ${lp.dividend} / ${lp.divisor} = ${q}${r?' rem. '+r:''}</p></div>`;return}let d=detail(act,cur());longStep.innerHTML=`${lines()}<div class="card active"><p class="title">${d.title}</p><p class="prompt">${d.prompt}</p><div class="field"><label>${d.label}</label><input id="longAnswer" inputmode="numeric" value="${ready?d.answer:''}" ${ready?'disabled':''} onkeydown="if(event.key==='Enter')longMain()"></div><div class="actions"><button class="primary" onclick="longMain()">${ready?'Next':'Check'}</button></div></div>`;(ready?document.querySelector('.actions button'):longAnswer).focus()}
-function longMain(){ready?advance():checkLong()}function checkLong(){let s=lp.steps[li],p=cur(),d=detail(s,p),a=longAnswer.value.trim(),f=longFeedback;f.className='feedback';if(a!==d.answer){f.textContent={divide:`Think: how many ${lp.divisor}s fit without going over ${s.partial}?`,multiply:'Use the quotient digit you just found.',subtract:'Subtract the product from the number you divided.',bring:'Look at the next digit in the dividend.'}[p];f.classList.add('bad');return}ready=true;f.textContent='Good.';f.classList.add('good');renderLong()}function revealLong(){if(!lp)setupLong();let s=lp.steps[li];if(!s)return;ready=true;longFeedback.textContent='Revealed.';longFeedback.className='feedback good';renderLong()}function advance(){let ps=parts(lp.steps[li]);if(pi<ps.length-1)pi++;else{li++;pi=0}ready=false;longFeedback.textContent='';renderLong()}
-function setupShort(){let x=parse(shortEquation.value),b=shortBoard,f=shortFeedback;f.textContent='';f.className='feedback';if(x.error){b.innerHTML='';f.textContent=x.error;f.classList.add('bad');return}sp=x;let ds=String(x.dividend).split('');b.innerHTML=`<div class="shortgrid"><div class="divisor">${x.divisor}</div><div class="shorthouse"><div class="shortq" id="shortQ">${ds.map((_,i)=>`<input class="qbox" id="sq-${i}" inputmode="numeric" maxlength="1">`).join('')}<span style="font-size:1.1rem;align-self:center">rem.</span><input class="qbox" id="shortR" inputmode="numeric" maxlength="2"></div><div class="shortdiv">${ds.map((d,i)=>`<div class="shortdigit">${i>0?`<input class="carry" id="carry-${i}" inputmode="numeric" maxlength="2">`:''}${d}</div>`).join('')}</div></div></div>`;document.getElementById('sq-0').focus()}function shortWork(){let ds=String(sp.dividend).split('').map(Number),car=0,carries=[],q='';ds.forEach((d,i)=>{let v=car*10+d,qd=Math.floor(v/sp.divisor);car=v%sp.divisor;q+=qd;if(i<ds.length-1)carries.push(car)});return{quotient:String(Number(q)),remainder:car,carries}}
-function checkShort(){if(!sp)return setupShort();let c=shortWork(),q=[...document.querySelectorAll('#shortQ .qbox')].filter(i=>i.id!=='shortR').map(i=>i.value.trim()).join(''),uq=String(Number(q||'0')),ur=Number(shortR.value||'0'),ok=true;c.carries.forEach((v,i)=>{let el=document.getElementById(`carry-${i+1}`);if(el&&Number(el.value||'0')!==v)ok=false});shortFeedback.className='feedback';if(uq===c.quotient&&ur===c.remainder&&ok){shortFeedback.textContent='Correct.';shortFeedback.classList.add('good')}else{shortFeedback.textContent=`Check again. Answer should be ${c.quotient}${c.remainder?' rem. '+c.remainder:''}.`;shortFeedback.classList.add('bad')}}function revealShort(){if(!sp)setupShort();let c=shortWork(),q=c.quotient.split('');document.querySelectorAll('#shortQ .qbox').forEach((i,n)=>{if(i.id!=='shortR')i.value=q[n]||''});shortR.value=c.remainder;c.carries.forEach((v,i)=>{let el=document.getElementById(`carry-${i+1}`);if(el)el.value=v});shortFeedback.textContent='Answer revealed.';shortFeedback.className='feedback good'}
-function initCanvas(){canvas=document.getElementById('canvas');ctx=canvas.getContext('2d');ctx.lineCap='round';ctx.lineJoin='round';setTool('pencil');saveCanvas();['mousedown','touchstart'].forEach(e=>canvas.addEventListener(e,start,{passive:false}));['mousemove','touchmove'].forEach(e=>canvas.addEventListener(e,draw,{passive:false}));['mouseup','mouseleave','touchend','touchcancel'].forEach(e=>canvas.addEventListener(e,stop));window.addEventListener('resize',resizeCanvas);resizeCanvas()}function resizeCanvas(){if(!canvas)return;let img=canvas.toDataURL(),r=canvas.getBoundingClientRect();canvas.width=Math.max(280,Math.floor(r.width));canvas.height=Math.max(280,Math.floor(r.height));let im=new Image();im.onload=()=>ctx.drawImage(im,0,0,canvas.width,canvas.height);im.src=img;setTool(tool)}function pos(e){let r=canvas.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return{x:p.clientX-r.left,y:p.clientY-r.top}}function start(e){e.preventDefault();drawing=true;let p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)}function draw(e){if(!drawing)return;e.preventDefault();let p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()}function stop(){if(!drawing)return;drawing=false;ctx.closePath();saveCanvas()}function setTool(t){tool=t;if(!ctx)return;ctx.globalCompositeOperation=t==='eraser'?'destination-out':'source-over';ctx.strokeStyle='#111';ctx.lineWidth=t==='eraser'?18:3;pencilBtn.classList.toggle('primary',t==='pencil');eraserBtn.classList.toggle('primary',t==='eraser')}function saveCanvas(){hist=hist.slice(0,hi+1);hist.push(canvas.toDataURL());hi=hist.length-1}function restore(){let im=new Image();im.onload=()=>{ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(im,0,0,canvas.width,canvas.height)};im.src=hist[hi]}function undoCanvas(){if(hi<=0)return;hi--;restore()}function redoCanvas(){if(hi>=hist.length-1)return;hi++;restore()}function clearCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height);saveCanvas()}
-window.addEventListener('load',()=>{setupLong();setupShort();switchTab('long');initCanvas();if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{})});
-</script>
+  <main class="app">
+    <header class="brand">
+      <h1>Jo<span>Go</span> Gr4 Division</h1>
+      <p>Long division first. Short division after the method makes sense.</p>
+    </header>
+
+    <section class="shell">
+      <div class="panel">
+        <div class="top-actions">
+          <button class="quiet-button" type="button" onclick="toggleTeacherDrawer()">Teacher</button>
+          <button class="quiet-button" type="button" onclick="toggleScratchpad()">Scratchpad</button>
+        </div>
+
+        <div id="teacherDrawer" class="teacher-drawer hidden">
+          <nav class="tabs" aria-label="Division modes">
+            <button class="tab-button active" id="longTab" type="button" onclick="switchTab('long')">Long Division</button>
+            <button class="tab-button" id="shortTab" type="button" onclick="switchTab('short')">Short Division</button>
+          </nav>
+
+          <div id="longTeacherControls">
+            <div class="controls">
+              <input id="longEquation" type="text" value="84 / 4" aria-label="Long division problem" onkeydown="handleSetupKey(event, 'long')">
+              <button class="primary" type="button" onclick="setupLongDivision()">Set Up</button>
+              <button class="secondary" type="button" onclick="resetLongWork()">Reset</button>
+              <button class="secondary" type="button" onclick="revealLongStep()">Reveal</button>
+            </div>
+            <div class="sample-row" aria-label="Long division sample problems">
+              <button type="button" onclick="setLongSample('84 / 4')">84 / 4</button>
+              <button type="button" onclick="setLongSample('96 / 3')">96 / 3</button>
+              <button type="button" onclick="setLongSample('156 / 3')">156 / 3</button>
+              <button type="button" onclick="setLongSample('137 / 5')">137 / 5</button>
+            </div>
+          </div>
+
+          <div id="shortTeacherControls" class="hidden">
+            <div class="controls">
+              <input id="shortEquation" type="text" value="852 / 8" aria-label="Short division problem" onkeydown="handleSetupKey(event, 'short')">
+              <button class="primary" type="button" onclick="setupShortDivision()">Set Up</button>
+              <button class="secondary" type="button" onclick="checkShortDivision()">Check</button>
+              <button class="secondary" type="button" onclick="revealShortDivision()">Reveal</button>
+            </div>
+            <div class="sample-row" aria-label="Short division sample problems">
+              <button type="button" onclick="setShortSample('246 / 2')">246 / 2</button>
+              <button type="button" onclick="setShortSample('852 / 8')">852 / 8</button>
+              <button type="button" onclick="setShortSample('936 / 3')">936 / 3</button>
+              <button type="button" onclick="setShortSample('725 / 6')">725 / 6</button>
+            </div>
+          </div>
+        </div>
+
+        <section id="longPanel">
+          <div class="work-area long-work-area">
+            <div id="longBoard"></div>
+            <div id="longStepArea"></div>
+            <div id="longFeedback" class="feedback" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section id="shortPanel" class="hidden">
+          <div class="work-area">
+            <div id="shortBoard"></div>
+            <div id="shortFeedback" class="feedback" aria-live="polite"></div>
+          </div>
+        </section>
+      </div>
+
+      <aside id="scratchpadPanel" class="scratchpad hidden">
+        <h2>Scratchpad</h2>
+        <div class="tools">
+          <button id="pencilBtn" class="primary" type="button" onclick="setTool('pencil')">Pencil</button>
+          <button id="eraserBtn" type="button" onclick="setTool('eraser')">Eraser</button>
+          <button type="button" onclick="undoCanvas()">Undo</button>
+          <button type="button" onclick="redoCanvas()">Redo</button>
+          <button type="button" onclick="clearCanvas()">Clear</button>
+        </div>
+        <canvas id="scratchCanvas" width="320" height="430"></canvas>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    let currentTab = "long";
+    let longProblem = null;
+    let longStepIndex = 0;
+    let longPartIndex = 0;
+    let longReadyForNext = false;
+    let shortProblem = null;
+    let canvas;
+    let ctx;
+    let drawing = false;
+    let tool = "pencil";
+    let history = [];
+    let historyIndex = -1;
+
+    function parseEquation(value) {
+      const parts = value.split("/").map(part => part.trim());
+      if (parts.length !== 2) return { error: "Use this format: 84 / 4" };
+      const dividend = Number(parts[0]);
+      const divisor = Number(parts[1]);
+      if (!Number.isInteger(dividend) || !Number.isInteger(divisor)) return { error: "Use whole numbers only." };
+      if (dividend < 0 || divisor <= 0) return { error: "The dividend must be 0 or more, and the divisor must be bigger than 0." };
+      if (divisor > 12) return { error: "For Grade 4 practice, keep the divisor 12 or less." };
+      return { dividend, divisor };
+    }
+
+    function toggleTeacherDrawer() {
+      document.getElementById("teacherDrawer").classList.toggle("hidden");
+    }
+
+    function toggleScratchpad() {
+      const panel = document.getElementById("scratchpadPanel");
+      panel.classList.toggle("hidden");
+      if (!panel.classList.contains("hidden")) resizeCanvasForDisplay();
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.getElementById("longPanel").classList.toggle("hidden", tab !== "long");
+      document.getElementById("shortPanel").classList.toggle("hidden", tab !== "short");
+      document.getElementById("longTeacherControls").classList.toggle("hidden", tab !== "long");
+      document.getElementById("shortTeacherControls").classList.toggle("hidden", tab !== "short");
+      document.getElementById("longTab").classList.toggle("active", tab === "long");
+      document.getElementById("shortTab").classList.toggle("active", tab === "short");
+    }
+
+    function setLongSample(problem) {
+      document.getElementById("longEquation").value = problem;
+      setupLongDivision();
+    }
+
+    function setShortSample(problem) {
+      document.getElementById("shortEquation").value = problem;
+      setupShortDivision();
+    }
+
+    function handleSetupKey(event, mode) {
+      if (event.key !== "Enter") return;
+      event.preventDefault();
+      if (mode === "long") setupLongDivision();
+      else setupShortDivision();
+    }
+
+    function placeLabel(index, length) {
+      const labels = ["ones", "tens", "hundreds", "thousands", "ten thousands"];
+      return labels[length - index - 1] || "";
+    }
+
+    function buildLongSteps(dividend, divisor) {
+      const digits = String(dividend).split("").map(Number);
+      const steps = [];
+      let partial = 0;
+      let startIndex = 0;
+
+      digits.forEach((digit, index) => {
+        partial = partial * 10 + digit;
+        const isLast = index === digits.length - 1;
+        if (partial >= divisor || isLast) {
+          const qDigit = Math.floor(partial / divisor);
+          const product = qDigit * divisor;
+          const remainder = partial - product;
+          steps.push({
+            startIndex,
+            endIndex: index,
+            partial,
+            qDigit,
+            product,
+            remainder,
+            bringDown: isLast ? "" : String(digits[index + 1])
+          });
+          partial = remainder;
+          startIndex = index + 1;
+        }
+      });
+
+      return steps;
+    }
+
+    function setupLongDivision() {
+      const parsed = parseEquation(document.getElementById("longEquation").value);
+      const feedback = document.getElementById("longFeedback");
+      feedback.textContent = "";
+      feedback.className = "feedback";
+
+      if (parsed.error) {
+        document.getElementById("longBoard").innerHTML = "";
+        document.getElementById("longStepArea").innerHTML = "";
+        feedback.textContent = parsed.error;
+        feedback.classList.add("bad");
+        return;
+      }
+
+      longProblem = {
+        dividend: parsed.dividend,
+        divisor: parsed.divisor,
+        steps: buildLongSteps(parsed.dividend, parsed.divisor)
+      };
+      longStepIndex = 0;
+      longPartIndex = 0;
+      longReadyForNext = false;
+      renderLongDivision();
+    }
+
+    function resetLongWork() {
+      if (!longProblem) return setupLongDivision();
+      longStepIndex = 0;
+      longPartIndex = 0;
+      longReadyForNext = false;
+      renderLongDivision();
+    }
+
+    function longPartsForStep(step) {
+      return step.bringDown === "" ? ["divide", "multiply", "subtract"] : ["divide", "multiply", "subtract", "bring"];
+    }
+
+    function currentLongPart() {
+      const step = longProblem.steps[longStepIndex];
+      if (!step) return null;
+      return longPartsForStep(step)[longPartIndex];
+    }
+
+    function longPartDetails(step, part) {
+      const details = {
+        divide: {
+          title: "Divide",
+          prompt: `How many ${longProblem.divisor}s fit into ${step.partial}?`,
+          label: "Quotient digit",
+          answer: String(step.qDigit)
+        },
+        multiply: {
+          title: "Multiply",
+          prompt: `${longProblem.divisor} x ${step.qDigit} = ?`,
+          label: "Product",
+          answer: String(step.product)
+        },
+        subtract: {
+          title: "Subtract",
+          prompt: `${step.partial} - ${step.product} = ?`,
+          label: "Remainder",
+          answer: String(step.remainder)
+        },
+        bring: {
+          title: "Bring Down",
+          prompt: "Which digit comes down next?",
+          label: "Next digit",
+          answer: step.bringDown
+        }
+      };
+      return details[part];
+    }
+
+    function longStepLine(step, part) {
+      const lines = {
+        divide: `${longProblem.divisor} into ${step.partial} = ${step.qDigit}`,
+        multiply: `${longProblem.divisor} x ${step.qDigit} = ${step.product}`,
+        subtract: `${step.partial} - ${step.product} = ${step.remainder === 0 ? "." : step.remainder}`,
+        bring: `Bring down ${step.bringDown}`
+      };
+      return lines[part];
+    }
+
+    function renderWorkingLines() {
+      const lines = [];
+      longProblem.steps.forEach((step, stepIndex) => {
+        const parts = longPartsForStep(step);
+        let visibleCount = 0;
+        if (stepIndex < longStepIndex) visibleCount = parts.length;
+        if (stepIndex === longStepIndex) visibleCount = longPartIndex + (longReadyForNext ? 1 : 0);
+        parts.slice(0, visibleCount).forEach(part => lines.push(longStepLine(step, part)));
+      });
+      return lines.length ? `<div class="working-lines">${lines.map(line => `<div>${line}</div>`).join("")}</div>` : "";
+    }
+
+    function isLongPartVisible(stepIndex, partName) {
+      const step = longProblem.steps[stepIndex];
+      const parts = longPartsForStep(step);
+      let visibleCount = 0;
+      if (stepIndex < longStepIndex) visibleCount = parts.length;
+      if (stepIndex === longStepIndex) visibleCount = longPartIndex + (longReadyForNext ? 1 : 0);
+      return parts.slice(0, visibleCount).includes(partName);
+    }
+
+    function digitCellsForValue(value, startIndex, endIndex, totalDigits) {
+      const cells = Array(totalDigits).fill("");
+      const span = endIndex - startIndex + 1;
+      const digits = String(value).padStart(span, " ").split("");
+      const firstColumn = Math.max(startIndex, endIndex - digits.length + 1);
+      digits.forEach((digit, offset) => {
+        const column = firstColumn + offset;
+        if (column >= 0 && column < totalDigits && digit !== " ") cells[column] = digit;
+      });
+      return cells;
+    }
+
+    function renderNumberRow(cells, extra = "") {
+      return `<div class="work-number-row" ${extra}>${cells.map(cell => {
+        const value = typeof cell === "object" ? cell.value : cell;
+        const className = typeof cell === "object" ? cell.className : "";
+        return `<span class="work-cell ${value === "" ? "blank" : ""} ${className}">${value || "0"}</span>`;
+      }).join("")}</div>`;
+    }
+
+    function renderRuleRow(startIndex, endIndex, totalDigits) {
+      const cells = Array(totalDigits).fill("");
+      cells[startIndex] = `<span class="work-rule"></span>`;
+      for (let index = startIndex + 1; index <= endIndex; index += 1) cells[index] = `<span class="work-rule"></span>`;
+      return `<div class="work-number-row">${cells.map(cell => cell || `<span class="work-cell blank">0</span>`).join("")}</div>`;
+    }
+
+    function remainderCell(value) {
+      return value === 0 ? { value: ".", className: "placeholder-dot" } : String(value);
+    }
+
+    function renderFormalWork(totalDigits) {
+      const rows = [];
+
+      longProblem.steps.forEach((step, stepIndex) => {
+        if (isLongPartVisible(stepIndex, "multiply")) {
+          rows.push(renderNumberRow(digitCellsForValue(step.product, step.startIndex, step.endIndex, totalDigits)));
+          rows.push(renderRuleRow(step.startIndex, step.endIndex, totalDigits));
+        }
+
+        if (isLongPartVisible(stepIndex, "subtract")) {
+          const remainderCells = Array(totalDigits).fill("");
+          remainderCells[step.endIndex] = remainderCell(step.remainder);
+          if (isLongPartVisible(stepIndex, "bring") && step.bringDown !== "") {
+            remainderCells[step.endIndex + 1] = { value: step.bringDown, className: "brought-down" };
+          }
+          rows.push(renderNumberRow(remainderCells));
+        }
+      });
+
+      return `<div class="formal-work" style="--digit-count:${totalDigits};">${rows.join("")}</div>`;
+    }
+
+    function renderLongDivision() {
+      const board = document.getElementById("longBoard");
+      const stepArea = document.getElementById("longStepArea");
+      const digits = String(longProblem.dividend).split("");
+      const quotientCells = Array(digits.length).fill("");
+      longProblem.steps.forEach((step, index) => {
+        if (index < longStepIndex || (index === longStepIndex && (longPartIndex > 0 || (longReadyForNext && currentLongPart() === "divide")))) {
+          quotientCells[step.endIndex] = String(step.qDigit);
+        }
+      });
+      const active = longProblem.steps[longStepIndex];
+
+      board.innerHTML = `
+        <div class="division-board">
+          <div class="divisor">${longProblem.divisor}</div>
+          <div class="house">
+            <div class="quotient-line" style="--digit-count:${digits.length};">
+              ${quotientCells.map((digit, index) => `<span class="board-value ${digit === "" ? "empty" : ""}" id="q-${index}">${digit || "0"}</span>`).join("")}
+            </div>
+            <div class="dividend-line">
+              ${digits.map((digit, index) => `
+                <div class="digit-wrap">
+                  <span class="place-label">${placeLabel(index, digits.length)}</span>
+                  <span class="${active && index >= active.startIndex && index <= active.endIndex ? "current-digit" : ""}">${digit}</span>
+                </div>
+              `).join("")}
+            </div>
+            ${renderFormalWork(digits.length)}
+          </div>
+        </div>
+      `;
+
+      if (!active) {
+        const q = Math.floor(longProblem.dividend / longProblem.divisor);
+        const r = longProblem.dividend % longProblem.divisor;
+        stepArea.innerHTML = `
+          ${renderWorkingLines()}
+          <div class="step-card active"><p class="step-title">Complete: ${longProblem.dividend} / ${longProblem.divisor} = ${q}${r ? " rem. " + r : ""}</p></div>
+        `;
+        return;
+      }
+
+      const part = currentLongPart();
+      const detail = longPartDetails(active, part);
+      const buttonText = longReadyForNext ? "Next" : "Check";
+      stepArea.innerHTML = `
+        ${renderWorkingLines()}
+        <div class="step-card active">
+          <p class="step-title">${detail.title}</p>
+          <p class="step-prompt">${detail.prompt}</p>
+          <div class="step-grid">
+            <div class="field">
+              <label for="longAnswer">${detail.label}</label>
+              <input id="longAnswer" inputmode="numeric" value="${longReadyForNext ? detail.answer : ""}" onkeydown="handleLongAnswerKey(event)" ${longReadyForNext ? "disabled" : ""}>
+            </div>
+          </div>
+          <div class="step-actions">
+            <button class="primary" id="longMainButton" type="button" onclick="handleLongMainAction()">${buttonText}</button>
+          </div>
+        </div>
+      `;
+      if (longReadyForNext) document.getElementById("longMainButton").focus();
+      else document.getElementById("longAnswer").focus();
+    }
+
+    function handleLongMainAction() {
+      if (longReadyForNext) advanceLongPart();
+      else checkLongStep();
+    }
+
+    function handleLongAnswerKey(event) {
+      if (event.key !== "Enter") return;
+      event.preventDefault();
+      handleLongMainAction();
+    }
+
+    function checkLongStep() {
+      const active = longProblem.steps[longStepIndex];
+      const feedback = document.getElementById("longFeedback");
+      const part = currentLongPart();
+      const detail = longPartDetails(active, part);
+      const answer = document.getElementById("longAnswer").value.trim();
+      feedback.className = "feedback";
+
+      if (answer !== detail.answer) {
+        const hints = {
+          divide: `Think: how many ${longProblem.divisor}s can fit without going over ${active.partial}?`,
+          multiply: "Use the quotient digit you just found.",
+          subtract: "Subtract the product from the number you divided.",
+          bring: "Look at the next digit in the dividend."
+        };
+        feedback.textContent = hints[part];
+        feedback.classList.add("bad");
+        return;
+      }
+
+      longReadyForNext = true;
+      feedback.textContent = "Good.";
+      feedback.classList.add("good");
+      renderLongDivision();
+    }
+
+    function revealLongStep() {
+      if (!longProblem) return setupLongDivision();
+      const active = longProblem.steps[longStepIndex];
+      if (!active) return;
+      const detail = longPartDetails(active, currentLongPart());
+      document.getElementById("longAnswer").value = detail.answer;
+      longReadyForNext = true;
+      const feedback = document.getElementById("longFeedback");
+      feedback.textContent = "Revealed.";
+      feedback.className = "feedback good";
+      renderLongDivision();
+    }
+
+    function advanceLongPart() {
+      if (!longProblem) return;
+      const parts = longPartsForStep(longProblem.steps[longStepIndex]);
+      if (longPartIndex < parts.length - 1) {
+        longPartIndex += 1;
+      } else {
+        longStepIndex += 1;
+        longPartIndex = 0;
+      }
+      longReadyForNext = false;
+      document.getElementById("longFeedback").textContent = "";
+      renderLongDivision();
+    }
+
+    function nextLongStep() {
+      advanceLongPart();
+    }
+
+    function setupShortDivision() {
+      const parsed = parseEquation(document.getElementById("shortEquation").value);
+      const board = document.getElementById("shortBoard");
+      const feedback = document.getElementById("shortFeedback");
+      feedback.textContent = "";
+      feedback.className = "feedback";
+
+      if (parsed.error) {
+        board.innerHTML = "";
+        feedback.textContent = parsed.error;
+        feedback.classList.add("bad");
+        return;
+      }
+
+      shortProblem = parsed;
+      const digits = String(parsed.dividend).split("");
+      board.innerHTML = `
+        <div class="short-grid">
+          <div class="divisor">${parsed.divisor}</div>
+          <div class="short-house">
+            <div class="short-quotient" id="shortQuotient">
+              ${digits.map((_, index) => `<input class="q-box" id="sq-${index}" inputmode="numeric" maxlength="1">`).join("")}
+              <span style="font-size:1.1rem; align-self:center;">rem.</span>
+              <input class="q-box" id="shortRemainder" inputmode="numeric" maxlength="2">
+            </div>
+            <div class="short-dividend">
+              ${digits.map((digit, index) => `
+                <div class="short-digit">
+                  ${index > 0 ? `<input class="carry" id="carry-${index}" inputmode="numeric" maxlength="2">` : ""}
+                  ${digit}
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById("sq-0").focus();
+    }
+
+    function shortWorking() {
+      const digits = String(shortProblem.dividend).split("").map(Number);
+      let carried = 0;
+      const carries = [];
+      let quotient = "";
+      digits.forEach((digit, index) => {
+        const value = carried * 10 + digit;
+        const qDigit = Math.floor(value / shortProblem.divisor);
+        carried = value % shortProblem.divisor;
+        quotient += qDigit;
+        if (index < digits.length - 1) carries.push(carried);
+      });
+      return { quotient: String(Number(quotient)), remainder: carried, carries };
+    }
+
+    function checkShortDivision() {
+      if (!shortProblem) return setupShortDivision();
+      const feedback = document.getElementById("shortFeedback");
+      const correct = shortWorking();
+      const qInputs = [...document.querySelectorAll("#shortQuotient .q-box")]
+        .filter(input => input.id !== "shortRemainder")
+        .map(input => input.value.trim()).join("");
+      const userQ = String(Number(qInputs || "0"));
+      const userR = Number(document.getElementById("shortRemainder").value || "0");
+      let carriesOk = true;
+
+      correct.carries.forEach((carry, index) => {
+        const input = document.getElementById(`carry-${index + 1}`);
+        if (input && Number(input.value || "0") !== carry) carriesOk = false;
+      });
+
+      feedback.className = "feedback";
+      if (userQ === correct.quotient && userR === correct.remainder && carriesOk) {
+        feedback.textContent = "Correct.";
+        feedback.classList.add("good");
+      } else {
+        feedback.textContent = `Check again. Answer should be ${correct.quotient}${correct.remainder ? " rem. " + correct.remainder : ""}.`;
+        feedback.classList.add("bad");
+      }
+    }
+
+    function revealShortDivision() {
+      if (!shortProblem) setupShortDivision();
+      const correct = shortWorking();
+      const qDigits = correct.quotient.split("");
+      document.querySelectorAll("#shortQuotient .q-box").forEach((input, index) => {
+        if (input.id !== "shortRemainder") input.value = qDigits[index] || "";
+      });
+      document.getElementById("shortRemainder").value = correct.remainder;
+      correct.carries.forEach((carry, index) => {
+        const input = document.getElementById(`carry-${index + 1}`);
+        if (input) input.value = carry;
+      });
+      const feedback = document.getElementById("shortFeedback");
+      feedback.textContent = "Answer revealed.";
+      feedback.className = "feedback good";
+    }
+
+    function initCanvas() {
+      canvas = document.getElementById("scratchCanvas");
+      ctx = canvas.getContext("2d");
+      ctx.lineWidth = 3;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = "#111";
+      saveCanvas();
+
+      canvas.addEventListener("mousedown", startDraw);
+      canvas.addEventListener("mousemove", draw);
+      canvas.addEventListener("mouseup", stopDraw);
+      canvas.addEventListener("mouseleave", stopDraw);
+      canvas.addEventListener("touchstart", startDraw, { passive: false });
+      canvas.addEventListener("touchmove", draw, { passive: false });
+      canvas.addEventListener("touchend", stopDraw);
+      window.addEventListener("resize", resizeCanvasForDisplay);
+      resizeCanvasForDisplay();
+    }
+
+    function resizeCanvasForDisplay() {
+      const image = canvas.toDataURL();
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(280, Math.floor(rect.width));
+      canvas.height = Math.max(280, Math.floor(rect.height));
+      const img = new Image();
+      img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      img.src = image;
+      setTool(tool);
+    }
+
+    function pointerPosition(event) {
+      const rect = canvas.getBoundingClientRect();
+      const point = event.touches ? event.touches[0] : event;
+      return { x: point.clientX - rect.left, y: point.clientY - rect.top };
+    }
+
+    function startDraw(event) {
+      event.preventDefault();
+      drawing = true;
+      const pos = pointerPosition(event);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    }
+
+    function draw(event) {
+      if (!drawing) return;
+      event.preventDefault();
+      const pos = pointerPosition(event);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+
+    function stopDraw() {
+      if (!drawing) return;
+      drawing = false;
+      ctx.closePath();
+      saveCanvas();
+    }
+
+    function setTool(nextTool) {
+      tool = nextTool;
+      ctx.globalCompositeOperation = tool === "eraser" ? "destination-out" : "source-over";
+      ctx.strokeStyle = "#111";
+      ctx.lineWidth = tool === "eraser" ? 18 : 3;
+      document.getElementById("pencilBtn").classList.toggle("primary", tool === "pencil");
+      document.getElementById("eraserBtn").classList.toggle("primary", tool === "eraser");
+    }
+
+    function saveCanvas() {
+      history = history.slice(0, historyIndex + 1);
+      history.push(canvas.toDataURL());
+      historyIndex = history.length - 1;
+    }
+
+    function restoreCanvas() {
+      const img = new Image();
+      img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+      img.src = history[historyIndex];
+    }
+
+    function undoCanvas() {
+      if (historyIndex <= 0) return;
+      historyIndex -= 1;
+      restoreCanvas();
+    }
+
+    function redoCanvas() {
+      if (historyIndex >= history.length - 1) return;
+      historyIndex += 1;
+      restoreCanvas();
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      saveCanvas();
+    }
+
+    window.addEventListener("load", () => {
+      setupLongDivision();
+      setupShortDivision();
+      switchTab("long");
+      initCanvas();
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      }
+    });
+  </script>
 </body>
 </html>

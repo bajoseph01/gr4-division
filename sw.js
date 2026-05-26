@@ -1,12 +1,12 @@
-const CACHE_NAME = "jogo-gr4-division-v1";
+const CACHE_NAME = "jogo-gr4-division-v10";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
   "./DivisionVocab.html",
   "./manifest.json",
-  "./sw.js",
-  "./icon.svg",
-  "./.nojekyll"
+  "./icon-192x192.png",
+  "./icon-512x512.png",
+  "./apple-touch-icon.png"
 ];
 
 self.addEventListener("install", event => {
@@ -32,13 +32,10 @@ self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
-      return fetch(event.request)
-        .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)).catch(() => {});
-          return response;
-        })
-        .catch(() => caches.match("./index.html"));
+      return fetch(event.request).catch(() => {
+        if (event.request.mode === "navigate") return caches.match("./index.html");
+        throw new Error("Offline asset not cached");
+      });
     })
   );
 });
