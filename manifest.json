@@ -1,0 +1,19 @@
+{
+  "name": "JoGo Gr4 Division",
+  "short_name": "Gr4 Division",
+  "description": "Grade 4 division practice app for teaching long division before short division.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4efe4",
+  "theme_color": "#2f7d4f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
