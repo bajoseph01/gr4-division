@@ -2,730 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Gr4 Division</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JoGo Gr4 Division · V2</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Gr4 Division">
-  <meta name="theme-color" content="#2f7d4f">
-  <style>
-    :root {
-      --green: #2f7d4f;
-      --green-dark: #23623d;
-      --yellow: #ffd166;
-      --blue: #d8ecff;
-      --red: #d94f45;
-      --ink: #252525;
-      --muted: #667085;
-      --paper: #fffdf7;
-      --line: #ded6c8;
-      --soft: #f4efe4;
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      overscroll-behavior-y: contain;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--ink);
-      background: var(--soft);
-      padding: 16px;
-    }
-
-    .app {
-      width: min(1040px, 100%);
-      margin: 0 auto;
-    }
-
-    .brand {
-      text-align: center;
-      margin: 8px 0 14px;
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: clamp(1.6rem, 4vw, 2.25rem);
-      letter-spacing: 0;
-    }
-
-    .brand span { color: #d99018; }
-
-    .brand p {
-      margin: 3px 0 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .shell {
-      display: block;
-    }
-
-    .panel, .scratchpad {
-      background: rgba(255, 255, 255, 0.98);
-      border: 1px solid rgba(0,0,0,0.07);
-      border-radius: 8px;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-    }
-
-    .panel { padding: 14px; }
-
-    .top-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .quiet-button {
-      background: #ece8de;
-      color: #38423b;
-      min-height: 38px;
-      padding: 8px 12px;
-    }
-
-    .teacher-drawer {
-      border: 1px solid #e4ddd0;
-      border-radius: 8px;
-      background: #fbfaf6;
-      padding: 12px;
-      margin-bottom: 12px;
-    }
-
-    .tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .tab-button, button {
-      border: 0;
-      border-radius: 6px;
-      padding: 11px 14px;
-      background: #e8ece9;
-      color: var(--ink);
-      font-weight: 700;
-      cursor: pointer;
-      min-height: 42px;
-    }
-
-    .tab-button.active, .primary {
-      background: var(--green);
-      color: white;
-    }
-
-    button:hover { filter: brightness(0.96); }
-    button:disabled { opacity: 0.45; cursor: not-allowed; }
-
-    .controls {
-      display: grid;
-      grid-template-columns: minmax(180px, 1fr) auto auto auto;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    input[type="text"], input[type="number"] {
-      border: 1px solid #c9c9c9;
-      border-radius: 6px;
-      min-height: 42px;
-      padding: 9px 10px;
-      font-size: 1rem;
-      background: white;
-    }
-
-    .sample-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin: 8px 0 0;
-    }
-
-    .sample-row button, .secondary {
-      background: #f0f2f4;
-      color: #263238;
-    }
-
-    .sample-bank {
-      display: grid;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .sample-band {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .sample-label {
-      color: #475467;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .sample-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .sample-buttons button {
-      min-width: 72px;
-      min-height: 44px;
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.05);
-    }
-
-    .difficulty-1 { background: #dcfce7; color: #143d25; }
-    .difficulty-2 { background: #bbf7d0; color: #143d25; }
-    .difficulty-3 { background: #fef3c7; color: #3f3208; }
-    .difficulty-4 { background: #fed7aa; color: #4a2505; }
-    .difficulty-5 { background: #fecaca; color: #5f1515; }
-    .difficulty-6 { background: #dc2626; color: white; }
-
-    .mode-note {
-      margin: 0 0 8px;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .work-area {
-      background: var(--paper);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 8px;
-      padding: clamp(14px, 3vw, 28px);
-      min-height: 520px;
-      overflow-x: auto;
-    }
-
-    .long-work-area {
-      display: grid;
-      grid-template-columns: minmax(320px, 0.95fr) minmax(300px, 1.05fr);
-      gap: clamp(16px, 3vw, 30px);
-      align-items: start;
-      overflow: visible;
-    }
-
-    #longBoard {
-      position: sticky;
-      top: 10px;
-      align-self: start;
-      overflow-x: auto;
-      padding-bottom: 6px;
-    }
-
-    #longStepArea {
-      align-self: start;
-    }
-
-    #longFeedback {
-      grid-column: 2;
-    }
-
-    .division-board {
-      display: grid;
-      grid-template-columns: auto auto;
-      justify-content: center;
-      align-items: start;
-      gap: 0;
-      font-family: "Courier New", monospace;
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      margin: 8px auto 28px;
-      width: max-content;
-      max-width: 100%;
-      --quotient-height: clamp(66px, 10vw, 96px);
-    }
-
-    .long-work-area .division-board {
-      font-size: clamp(2.1rem, 4.8vw, 4.4rem);
-      margin-top: 0;
-    }
-
-    .divisor {
-      padding: 0 8px 9px 0;
-      line-height: 1;
-    }
-
-    .division-board > .divisor {
-      margin-top: calc(var(--quotient-height) + clamp(26px, 4vw, 40px));
-      padding: 0 8px 0 0;
-    }
-
-    .house {
-      min-width: 180px;
-      --cell-size: clamp(44px, 7vw, 64px);
-      --cell-gap: 12px;
-      --house-pad: 13px;
-    }
-
-    .long-work-area .house {
-      --cell-size: clamp(40px, 5.5vw, 58px);
-    }
-
-    .quotient-line {
-      min-height: var(--quotient-height);
-      border-bottom: 3px solid #111;
-      padding-left: var(--house-pad);
-      display: grid;
-      grid-template-columns: repeat(var(--digit-count), var(--cell-size));
-      justify-content: center;
-      gap: var(--cell-gap);
-      align-items: end;
-    }
-
-    .dividend-line {
-      border-left: 3px solid #111;
-      padding: 8px 10px 0 var(--house-pad);
-      display: flex;
-      gap: var(--cell-gap);
-      justify-content: center;
-      min-height: clamp(70px, 10vw, 100px);
-    }
-
-    .digit-wrap {
-      display: grid;
-      gap: 2px;
-      justify-items: center;
-      min-width: 32px;
-    }
-
-    .place-label {
-      font-size: 0.8rem;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--muted);
-      line-height: 1;
-    }
-
-    .current-digit {
-      background: var(--yellow);
-      border-radius: 6px;
-      padding: 0 5px;
-    }
-
-    .q-box {
-      width: clamp(44px, 7vw, 64px);
-      height: clamp(50px, 7vw, 70px);
-      text-align: center;
-      font-family: "Courier New", monospace;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      padding: 0;
-      border-color: #7fb3e8;
-      background: var(--blue);
-    }
-
-    .board-value {
-      display: inline-grid;
-      place-items: center;
-      width: var(--cell-size);
-      height: clamp(50px, 7vw, 70px);
-      color: #111;
-    }
-
-    .board-value.empty {
-      color: transparent;
-    }
-
-    .formal-work {
-      border-left: 3px solid transparent;
-      padding-left: calc(var(--house-pad) + clamp(22px, 4vw, 34px));
-      padding-right: 10px;
-      margin-top: -8px;
-      font-size: clamp(2rem, 5.5vw, 4rem);
-    }
-
-    .work-number-row {
-      display: grid;
-      grid-template-columns: repeat(var(--digit-count), var(--cell-size));
-      gap: var(--cell-gap);
-      justify-content: center;
-      min-height: clamp(44px, 6vw, 62px);
-      align-items: center;
-      position: relative;
-    }
-
-    .work-number-row.has-minus::before {
-      content: "-";
-      position: absolute;
-      left: calc(-0.62 * var(--cell-size));
-      top: 50%;
-      transform: translateY(-52%);
-      color: #111;
-      font-size: 0.85em;
-      font-weight: 800;
-    }
-
-    .work-cell {
-      display: grid;
-      place-items: center;
-      min-width: 0;
-      line-height: 1;
-    }
-
-    .work-cell.blank {
-      color: transparent;
-    }
-
-    .work-cell.placeholder-dot {
-      color: #6b7280;
-      font-size: 0.7em;
-      align-self: end;
-      padding-bottom: 0.12em;
-    }
-
-    .work-cell.brought-down {
-      color: #111;
-      font-weight: 700;
-      position: relative;
-    }
-
-    .work-cell.brought-down::before {
-      content: "↓";
-      position: absolute;
-      top: -1.08em;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(47, 125, 79, 0.6);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.72em;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .work-rule {
-      height: 3px;
-      background: #111;
-      margin: 2px 0 5px;
-      justify-self: stretch;
-    }
-
-    .work-rule.start {
-      margin-left: 0;
-    }
-
-    .work-rule.middle {
-      margin-left: calc(-1 * var(--cell-gap));
-    }
-
-    .work-rule.end {
-      margin-left: calc(-1 * var(--cell-gap));
-    }
-
-    .working-lines {
-      width: 100%;
-      max-height: 190px;
-      overflow-y: auto;
-      margin: 0 0 12px;
-      color: #3a3a3a;
-      background: rgba(255,255,255,0.7);
-      border: 1px solid #ebe3d5;
-      border-radius: 8px;
-      font-size: clamp(0.95rem, 1.7vw, 1.2rem);
-      line-height: 1.5;
-    }
-
-    .working-lines div {
-      border-bottom: 1px solid #ebe3d5;
-      padding: 5px 10px;
-    }
-
-    .working-lines div:last-child {
-      border-bottom: 0;
-    }
-
-    .step-card {
-      background: white;
-      border: 1px solid #e5dfd0;
-      border-radius: 8px;
-      padding: clamp(14px, 3vw, 24px);
-      margin: 0 auto;
-      width: min(620px, 100%);
-      text-align: center;
-    }
-
-    .step-card.active {
-      border-color: var(--green);
-      box-shadow: inset 4px 0 0 var(--green);
-    }
-
-    .step-title {
-      margin: 0 0 14px;
-      font-size: clamp(1.35rem, 3vw, 2.1rem);
-      font-weight: 700;
-    }
-
-    .step-prompt {
-      margin: 0 0 16px;
-      color: #344054;
-      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
-    }
-
-    .step-grid {
-      display: block;
-      width: min(260px, 100%);
-      margin: 0 auto;
-    }
-
-    .field label {
-      display: block;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #475467;
-      margin-bottom: 6px;
-    }
-
-    .field input {
-      width: 100%;
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
-      min-height: 58px;
-    }
-
-    .step-actions {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .feedback {
-      min-height: 28px;
-      margin-top: 14px;
-      font-weight: 700;
-      text-align: center;
-      font-size: clamp(1rem, 2vw, 1.2rem);
-    }
-
-    .feedback.good { color: var(--green-dark); }
-    .feedback.bad { color: var(--red); }
-
-    .short-grid {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      font-family: "Courier New", monospace;
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      margin: 8px 0 18px;
-    }
-
-    .short-house {
-      display: grid;
-      grid-template-rows: auto auto;
-    }
-
-    .short-quotient {
-      border-bottom: 3px solid #111;
-      border-left: 3px solid transparent;
-      padding-left: 12px;
-      display: flex;
-      gap: 8px;
-      min-height: 54px;
-      align-items: end;
-    }
-
-    .short-dividend {
-      border-left: 3px solid #111;
-      padding: 8px 10px 0 12px;
-      display: flex;
-      gap: 8px;
-    }
-
-    .short-digit {
-      position: relative;
-      min-width: 38px;
-      text-align: center;
-    }
-
-    .carry {
-      position: absolute;
-      top: -22px;
-      left: -8px;
-      width: 34px;
-      min-height: 30px;
-      padding: 0;
-      text-align: center;
-      color: #b42318;
-      background: #fff0f0;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .scratchpad {
-      padding: 12px;
-      margin-top: 12px;
-    }
-
-    .scratchpad h2 {
-      font-size: 1.05rem;
-      margin: 0 0 8px;
-      text-align: center;
-    }
-
-    .tools {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 8px;
-    }
-
-    .tools button {
-      min-height: 36px;
-      padding: 8px 10px;
-      font-size: 0.85rem;
-    }
-
-    canvas {
-      width: 100%;
-      height: 300px;
-      border: 1px solid #cfcfcf;
-      border-radius: 6px;
-      background: white;
-      touch-action: none;
-      cursor: crosshair;
-    }
-
-    .hidden { display: none; }
-
-    @media (max-width: 850px) {
-      body { padding: 10px; }
-      .long-work-area {
-        grid-template-columns: 1fr;
-        overflow-x: auto;
-      }
-      #longBoard {
-        position: static;
-      }
-      #longFeedback {
-        grid-column: 1;
-      }
-      .controls { grid-template-columns: 1fr 1fr; }
-      .controls input { grid-column: 1 / -1; }
-      canvas { height: 320px; }
-    }
-
-    @media (max-width: 520px) {
-      .panel { padding: 12px; }
-      .controls { grid-template-columns: 1fr; }
-      .sample-row button, .controls button { width: 100%; }
-      .sample-band {
-        grid-template-columns: 1fr;
-      }
-      .sample-buttons button {
-        min-width: 0;
-        flex: 1 1 84px;
-      }
-      .q-box { width: 38px; }
-    }
-  </style>
+  <meta name="theme-color" content="#07552d">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <main class="app">
     <header class="brand">
-      <h1>Jo<span>Go</span> Gr4 Division</h1>
-      <p>Long division first. Short division after the method makes sense.</p>
+      <h1>JoGo Gr4 Division</h1>
+      <span class="version">V2</span>
+      <button id="teacherToggle" type="button" aria-expanded="false" aria-controls="teacherDrawer" onclick="toggleTeacherDrawer()">Teacher settings</button>
     </header>
 
     <section class="shell">
       <div class="panel">
-        <div class="top-actions">
-          <button class="quiet-button" type="button" onclick="toggleTeacherDrawer()">SETUP</button>
-          <button class="quiet-button" type="button" onclick="toggleScratchpad()">Scratchpad</button>
-        </div>
-
-        <div id="teacherDrawer" class="teacher-drawer hidden">
           <nav class="tabs" aria-label="Division modes">
-            <button class="tab-button active" id="longTab" type="button" onclick="switchTab('long')">Long Division</button>
-            <button class="tab-button" id="shortTab" type="button" onclick="switchTab('short')">Short Division</button>
+            <button class="tab-button active" id="longTab" type="button" aria-pressed="true" aria-controls="longPanel" onclick="switchTab('long')">Long Division</button>
+            <button class="tab-button" id="shortTab" type="button" aria-pressed="false" aria-controls="shortPanel" onclick="switchTab('short')">Short Division</button>
           </nav>
+        <div id="teacherDrawer" class="teacher-drawer hidden">
 
           <div id="longTeacherControls">
             <div class="controls">
-              <input id="longEquation" type="text" value="84 / 4" aria-label="Long division problem" onkeydown="handleSetupKey(event, 'long')">
+              <input id="longEquation" type="text" value="48 ÷ 2" aria-label="Long division problem" onkeydown="handleSetupKey(event, 'long')">
               <button class="primary" type="button" onclick="setupLongDivision()">Set Up</button>
               <button class="secondary" type="button" onclick="resetLongWork()">Reset</button>
               <button class="secondary" type="button" onclick="revealLongStep()">Reveal</button>
             </div>
-            <div class="sample-bank" aria-label="Long division sample problems">
-              <div class="sample-band">
-                <div class="sample-label">2 digit exact</div>
-                <div class="sample-buttons">
-                  <button class="difficulty-1" type="button" onclick="setLongSample('48 / 2')">48 / 2</button>
-                  <button class="difficulty-1" type="button" onclick="setLongSample('84 / 4')">84 / 4</button>
-                  <button class="difficulty-1" type="button" onclick="setLongSample('96 / 3')">96 / 3</button>
-                  <button class="difficulty-2" type="button" onclick="setLongSample('75 / 5')">75 / 5</button>
-                  <button class="difficulty-2" type="button" onclick="setLongSample('72 / 6')">72 / 6</button>
-                </div>
-              </div>
-              <div class="sample-band">
-                <div class="sample-label">3 digit exact</div>
-                <div class="sample-buttons">
-                  <button class="difficulty-2" type="button" onclick="setLongSample('132 / 6')">132 / 6</button>
-                  <button class="difficulty-2" type="button" onclick="setLongSample('156 / 3')">156 / 3</button>
-                  <button class="difficulty-3" type="button" onclick="setLongSample('248 / 4')">248 / 4</button>
-                  <button class="difficulty-3" type="button" onclick="setLongSample('426 / 3')">426 / 3</button>
-                  <button class="difficulty-3" type="button" onclick="setLongSample('864 / 4')">864 / 4</button>
-                </div>
-              </div>
-              <div class="sample-band">
-                <div class="sample-label">2 digit rem.</div>
-                <div class="sample-buttons">
-                  <button class="difficulty-4" type="button" onclick="setLongSample('85 / 4')">85 / 4</button>
-                  <button class="difficulty-4" type="button" onclick="setLongSample('74 / 3')">74 / 3</button>
-                  <button class="difficulty-4" type="button" onclick="setLongSample('59 / 5')">59 / 5</button>
-                  <button class="difficulty-5" type="button" onclick="setLongSample('97 / 6')">97 / 6</button>
-                  <button class="difficulty-5" type="button" onclick="setLongSample('79 / 4')">79 / 4</button>
-                </div>
-              </div>
-              <div class="sample-band">
-                <div class="sample-label">3 digit rem.</div>
-                <div class="sample-buttons">
-                  <button class="difficulty-5" type="button" onclick="setLongSample('137 / 5')">137 / 5</button>
-                  <button class="difficulty-5" type="button" onclick="setLongSample('258 / 4')">258 / 4</button>
-                  <button class="difficulty-5" type="button" onclick="setLongSample('347 / 6')">347 / 6</button>
-                  <button class="difficulty-6" type="button" onclick="setLongSample('529 / 7')">529 / 7</button>
-                  <button class="difficulty-6" type="button" onclick="setLongSample('746 / 9')">746 / 9</button>
-                </div>
-              </div>
-            </div>
+            <div id="sampleBank" class="sample-bank" aria-label="Long division sample problems"></div>
           </div>
 
           <div id="shortTeacherControls" class="hidden">
             <div class="controls">
-              <input id="shortEquation" type="text" value="852 / 8" aria-label="Short division problem" onkeydown="handleSetupKey(event, 'short')">
+              <input id="shortEquation" type="text" value="48 ÷ 2" aria-label="Short division problem" onkeydown="handleSetupKey(event, 'short')">
               <button class="primary" type="button" onclick="setupShortDivision()">Set Up</button>
               <button class="secondary" type="button" onclick="checkShortDivision()">Check</button>
               <button class="secondary" type="button" onclick="revealShortDivision()">Reveal</button>
             </div>
             <div class="sample-row" aria-label="Short division sample problems">
-              <button type="button" onclick="setShortSample('246 / 2')">246 / 2</button>
-              <button type="button" onclick="setShortSample('852 / 8')">852 / 8</button>
-              <button type="button" onclick="setShortSample('936 / 3')">936 / 3</button>
-              <button type="button" onclick="setShortSample('725 / 6')">725 / 6</button>
+              <button type="button" onclick="setShortSample('246 ÷ 2')">246 ÷ 2</button>
+              <button type="button" onclick="setShortSample('852 ÷ 8')">852 ÷ 8</button>
+              <button type="button" onclick="setShortSample('936 ÷ 3')">936 ÷ 3</button>
+              <button type="button" onclick="setShortSample('725 ÷ 6')">725 ÷ 6</button>
             </div>
           </div>
         </div>
 
         <section id="longPanel">
+          <h2 class="problem-heading"><span id="longProblemHeading">48 ÷ 2</span></h2>
           <div class="work-area long-work-area">
-            <div id="longBoard"></div>
-            <div id="longStepArea"></div>
-            <div id="longFeedback" class="feedback" aria-live="polite"></div>
+            <div class="board-column">
+              <div class="practice-controls">
+                <label for="practiceLevel">Practice level</label>
+                <select id="practiceLevel" onchange="setPracticeLevel(this.value)" aria-describedby="practiceStatus"></select>
+                <button id="nextPractice" type="button" onclick="nextPracticeProblem()" disabled>Next problem</button>
+                <p id="practiceStatus" aria-live="polite"></p>
+              </div>
+              <div id="longBoard" tabindex="0" role="region" aria-label="Long division working board"></div>
+            </div>
+            <aside class="lesson-column" aria-label="Current division step">
+              <div class="lesson-card">
+                <div id="longStepArea"></div>
+                <div class="secondary-actions">
+                  <button type="button" onclick="revealLongStep()">Reveal</button>
+                  <button type="button" onclick="resetLongWork()">Reset</button>
+                </div>
+                <div id="longFeedback" class="feedback" aria-live="polite"></div>
+              </div>
+              <div class="lesson-tools">
+                <button type="button" onclick="toggleTeacherDrawer()">Teacher tools</button>
+                <button type="button" aria-controls="scratchpadPanel" onclick="toggleScratchpad()">Scratchpad</button>
+              </div>
+            </aside>
           </div>
         </section>
 
         <section id="shortPanel" class="hidden">
+          <h2 class="problem-heading"><span id="shortProblemHeading">48 ÷ 2</span></h2>
           <div class="work-area">
             <div id="shortBoard"></div>
+            <div class="secondary-actions">
+              <button class="primary" type="button" onclick="checkShortDivision()">Check</button>
+              <button type="button" onclick="revealShortDivision()">Reveal</button>
+              <button type="button" onclick="toggleScratchpad()">Scratchpad</button>
+            </div>
             <div id="shortFeedback" class="feedback" aria-live="polite"></div>
           </div>
         </section>
@@ -759,19 +124,69 @@
     let history = [];
     let historyIndex = -1;
 
+    const practiceLevels = [
+      { name: "2 digits · no remainder", note: "No carrying between columns", problems: ["48 ÷ 2", "84 ÷ 4", "96 ÷ 3"] },
+      { name: "2 digits · carrying", note: "Carry between columns; no final remainder", problems: ["75 ÷ 5", "72 ÷ 6"] },
+      { name: "2 digits · with remainder", note: "Learn to finish with a remainder", problems: ["85 ÷ 4", "74 ÷ 3", "59 ÷ 5", "97 ÷ 6", "79 ÷ 4"] },
+      { name: "3 digits · no remainder", note: "Build up to a longer dividend", problems: ["156 ÷ 3", "864 ÷ 4", "426 ÷ 3", "248 ÷ 4", "132 ÷ 6"] },
+      { name: "3 digits · with remainder", note: "Longer working with a final remainder", problems: ["137 ÷ 5", "258 ÷ 4", "347 ÷ 6", "529 ÷ 7", "746 ÷ 9"] }
+    ];
+
+    function initPractice() {
+      document.getElementById("practiceLevel").innerHTML = practiceLevels.map((level, index) => `<option value="${index}">${index + 1}. ${level.name}</option>`).join("") + '<option value="custom" disabled>Custom problem</option>';
+      document.getElementById("sampleBank").innerHTML = practiceLevels.map((level, index) => `<div class="sample-band"><div class="sample-label">${index + 1}. ${level.name}</div><div class="sample-buttons">${level.problems.map(problem => `<button type="button" onclick="setLongSample('${problem}')">${problem}</button>`).join("")}</div></div>`).join("");
+    }
+
+    function practicePosition() {
+      if (!longProblem) return { level: -1, problem: -1 };
+      const equation = `${longProblem.dividend} ÷ ${longProblem.divisor}`;
+      const level = practiceLevels.findIndex(item => item.problems.includes(equation));
+      return { level, problem: level < 0 ? -1 : practiceLevels[level].problems.indexOf(equation) };
+    }
+
+    function updatePracticeControls() {
+      const position = practicePosition();
+      const button = document.getElementById("nextPractice");
+      const level = practiceLevels[position.level];
+      const finished = !!longProblem && !longProblem.steps[longStepIndex];
+      document.getElementById("practiceLevel").value = level ? String(position.level) : "custom";
+      document.getElementById("practiceStatus").textContent = level
+        ? `Problem ${position.problem + 1} of ${level.problems.length} · ${level.note}`
+        : "Custom problem · choose a level to return to guided practice";
+      button.disabled = !finished;
+      button.textContent = !level ? "Start practice" : position.problem < level.problems.length - 1
+        ? "Next problem" : position.level < practiceLevels.length - 1 ? "Next level" : "Practise again";
+    }
+
+    function setPracticeLevel(value) {
+      const level = practiceLevels[Number(value)];
+      if (level) setLongSample(level.problems[0]);
+    }
+
+    function nextPracticeProblem() {
+      if (!longProblem || longProblem.steps[longStepIndex]) return;
+      const position = practicePosition();
+      const level = practiceLevels[position.level];
+      if (!level) return setPracticeLevel(0);
+      if (position.problem + 1 < level.problems.length) setLongSample(level.problems[position.problem + 1]);
+      else setPracticeLevel(position.level + 1 < practiceLevels.length ? position.level + 1 : position.level);
+    }
+
     function parseEquation(value) {
-      const parts = value.split("/").map(part => part.trim());
-      if (parts.length !== 2) return { error: "Use this format: 84 / 4" };
+      const parts = value.split(/[÷/]/).map(part => part.trim());
+      if (parts.length !== 2) return { error: "Use this format: 84 ÷ 4" };
+      if (parts.some(part => !/^\d+$/.test(part))) return { error: "Use whole numbers only." };
       const dividend = Number(parts[0]);
       const divisor = Number(parts[1]);
-      if (!Number.isInteger(dividend) || !Number.isInteger(divisor)) return { error: "Use whole numbers only." };
+      if (!Number.isSafeInteger(dividend) || !Number.isSafeInteger(divisor)) return { error: "Use smaller whole numbers." };
       if (dividend < 0 || divisor <= 0) return { error: "The dividend must be 0 or more, and the divisor must be bigger than 0." };
       if (divisor > 12) return { error: "For Grade 4 practice, keep the divisor 12 or less." };
       return { dividend, divisor };
     }
 
     function toggleTeacherDrawer() {
-      document.getElementById("teacherDrawer").classList.toggle("hidden");
+      const hidden = document.getElementById("teacherDrawer").classList.toggle("hidden");
+      document.getElementById("teacherToggle").setAttribute("aria-expanded", String(!hidden));
     }
 
     function toggleScratchpad() {
@@ -788,6 +203,9 @@
       document.getElementById("shortTeacherControls").classList.toggle("hidden", tab !== "short");
       document.getElementById("longTab").classList.toggle("active", tab === "long");
       document.getElementById("shortTab").classList.toggle("active", tab === "short");
+      document.getElementById("longTab").setAttribute("aria-pressed", String(tab === "long"));
+      document.getElementById("shortTab").setAttribute("aria-pressed", String(tab === "short"));
+      if (tab === "long") requestAnimationFrame(drawBringDownArrows);
     }
 
     function setLongSample(problem) {
@@ -821,7 +239,7 @@
       digits.forEach((digit, index) => {
         partial = partial * 10 + digit;
         const isLast = index === digits.length - 1;
-        if (partial >= divisor || isLast) {
+        if (partial >= divisor || isLast || steps.length > 0) {
           const qDigit = Math.floor(partial / divisor);
           const product = qDigit * divisor;
           const remainder = partial - product;
@@ -849,10 +267,13 @@
       feedback.className = "feedback";
 
       if (parsed.error) {
+        longProblem = null;
+        document.getElementById("longProblemHeading").textContent = "Choose a division problem";
         document.getElementById("longBoard").innerHTML = "";
         document.getElementById("longStepArea").innerHTML = "";
         feedback.textContent = parsed.error;
         feedback.classList.add("bad");
+        updatePracticeControls();
         return;
       }
 
@@ -864,6 +285,7 @@
       longStepIndex = 0;
       longPartIndex = 0;
       longReadyForNext = false;
+      document.getElementById("longProblemHeading").textContent = `${parsed.dividend} ÷ ${parsed.divisor}`;
       renderLongDivision();
     }
 
@@ -872,6 +294,7 @@
       longStepIndex = 0;
       longPartIndex = 0;
       longReadyForNext = false;
+      document.getElementById("longFeedback").textContent = "";
       renderLongDivision();
     }
 
@@ -895,13 +318,13 @@
         },
         multiply: {
           title: "Multiply",
-          prompt: `${longProblem.divisor} x ${step.qDigit} = ?`,
+          prompt: `${longProblem.divisor} × ${step.qDigit} = ?`,
           label: "Product",
           answer: String(step.product)
         },
         subtract: {
           title: "Subtract",
-          prompt: `${step.partial} - ${step.product} = ?`,
+          prompt: `${step.partial} − ${step.product} = ?`,
           label: "Remainder",
           answer: String(step.remainder)
         },
@@ -918,8 +341,8 @@
     function longStepLine(step, part) {
       const lines = {
         divide: `${longProblem.divisor} into ${step.partial} = ${step.qDigit}`,
-        multiply: `${longProblem.divisor} x ${step.qDigit} = ${step.product}`,
-        subtract: `${step.partial} - ${step.product} = ${step.remainder === 0 ? "." : step.remainder}`,
+        multiply: `${longProblem.divisor} × ${step.qDigit} = ${step.product}`,
+        subtract: `${step.partial} − ${step.product} = ${step.remainder}`,
         bring: `Bring down ${step.bringDown}`
       };
       return lines[part];
@@ -934,7 +357,7 @@
         if (stepIndex === longStepIndex) visibleCount = longPartIndex + (longReadyForNext ? 1 : 0);
         parts.slice(0, visibleCount).forEach(part => lines.push(longStepLine(step, part)));
       });
-      return lines.length ? `<div class="working-lines">${lines.map(line => `<div>${line}</div>`).join("")}</div>` : "";
+      return lines.length ? `<details class="working-lines"><summary>Working in words</summary><div class="working-list">${lines.map(line => `<div>${line}</div>`).join("")}</div></details>` : "";
     }
 
     function isLongPartVisible(stepIndex, partName) {
@@ -946,159 +369,34 @@
       return parts.slice(0, visibleCount).includes(partName);
     }
 
-    function digitCellsForValue(value, startIndex, endIndex, totalDigits) {
-      const cells = Array(totalDigits).fill("");
-      const digits = String(value).split("");
-      const firstColumn = Math.max(0, endIndex - digits.length + 1);
-      digits.forEach((digit, offset) => {
-        const column = firstColumn + offset;
-        if (column >= 0 && column < totalDigits && digit !== " ") cells[column] = digit;
-      });
-      return cells;
-    }
-
-    function firstColumnForValue(value, endIndex) {
-      return Math.max(0, endIndex - String(value).length + 1);
-    }
-
-    function renderNumberRow(cells, extra = "") {
-      return `<div class="work-number-row" ${extra}>${cells.map(cell => {
-        const value = typeof cell === "object" ? cell.value : cell;
-        const className = typeof cell === "object" ? cell.className : "";
-        return `<span class="work-cell ${value === "" ? "blank" : ""} ${className}">${value || "0"}</span>`;
-      }).join("")}</div>`;
-    }
-
-    function renderRuleRow(startIndex, endIndex, totalDigits) {
-      const cells = Array(totalDigits).fill("");
-      for (let index = startIndex; index <= endIndex; index += 1) {
-        let position = "middle";
-        if (index === startIndex) position = "start";
-        if (index === endIndex) position = index === startIndex ? "single" : "end";
-        cells[index] = `<span class="work-rule ${position}"></span>`;
-      }
-      return `<div class="work-number-row">${cells.map(cell => cell || `<span class="work-cell blank">0</span>`).join("")}</div>`;
-    }
-
-    function remainderCell(value) {
-      return value === 0 ? { value: ".", className: "placeholder-dot" } : String(value);
-    }
-
-    function remainderCellsForStep(step, totalDigits) {
-      const cells = Array(totalDigits).fill("");
-      if (step.remainder === 0) {
-        const firstColumn = firstColumnForValue(step.partial, step.endIndex);
-        for (let index = firstColumn; index <= step.endIndex; index += 1) {
-          cells[index] = { value: ".", className: "placeholder-dot" };
-        }
-        return cells;
-      }
-
-      return digitCellsForValue(step.remainder, step.startIndex, step.endIndex, totalDigits);
-    }
-
-    function renderFormalWork(totalDigits) {
-      const rows = [];
-
-      longProblem.steps.forEach((step, stepIndex) => {
-        if (isLongPartVisible(stepIndex, "multiply")) {
-          rows.push(renderNumberRow(digitCellsForValue(step.product, step.startIndex, step.endIndex, totalDigits), 'class="has-minus"'));
-          const ruleStart = Math.min(
-            firstColumnForValue(step.partial, step.endIndex),
-            firstColumnForValue(step.product, step.endIndex)
-          );
-          rows.push(renderRuleRow(ruleStart, step.endIndex, totalDigits));
-        }
-
-        if (isLongPartVisible(stepIndex, "subtract")) {
-          const remainderCells = remainderCellsForStep(step, totalDigits);
-          if (isLongPartVisible(stepIndex, "bring") && step.bringDown !== "") {
-            remainderCells[step.endIndex + 1] = { value: step.bringDown, className: "brought-down" };
-          }
-          rows.push(renderNumberRow(remainderCells));
-        }
-      });
-
-      return `<div class="formal-work" style="--digit-count:${totalDigits};">${rows.join("")}</div>`;
-    }
-
-    function renderLongDivision() {
-      const board = document.getElementById("longBoard");
-      const stepArea = document.getElementById("longStepArea");
-      const digits = String(longProblem.dividend).split("");
-      const quotientCells = Array(digits.length).fill("");
-      longProblem.steps.forEach((step, index) => {
-        if (index < longStepIndex || (index === longStepIndex && (longPartIndex > 0 || (longReadyForNext && currentLongPart() === "divide")))) {
-          quotientCells[step.endIndex] = String(step.qDigit);
-        }
-      });
-      const active = longProblem.steps[longStepIndex];
-
-      board.innerHTML = `
-        <div class="division-board">
-          <div class="divisor">${longProblem.divisor}</div>
-          <div class="house">
-            <div class="quotient-line" style="--digit-count:${digits.length};">
-              ${quotientCells.map((digit, index) => `<span class="board-value ${digit === "" ? "empty" : ""}" id="q-${index}">${digit || "0"}</span>`).join("")}
-            </div>
-            <div class="dividend-line">
-              ${digits.map((digit, index) => `
-                <div class="digit-wrap">
-                  <span class="place-label">${placeLabel(index, digits.length)}</span>
-                  <span class="${active && index >= active.startIndex && index <= active.endIndex ? "current-digit" : ""}">${digit}</span>
-                </div>
-              `).join("")}
-            </div>
-            ${renderFormalWork(digits.length)}
-          </div>
-        </div>
-      `;
-
-      if (!active) {
-        const q = Math.floor(longProblem.dividend / longProblem.divisor);
-        const r = longProblem.dividend % longProblem.divisor;
-        stepArea.innerHTML = `
-          ${renderWorkingLines()}
-          <div class="step-card active"><p class="step-title">Complete: ${longProblem.dividend} / ${longProblem.divisor} = ${q}${r ? " rem. " + r : ""}</p></div>
-        `;
-        return;
-      }
-
-      const part = currentLongPart();
-      const detail = longPartDetails(active, part);
-      const buttonText = longReadyForNext ? "Next" : "Check";
-      stepArea.innerHTML = `
-        ${renderWorkingLines()}
-        <div class="step-card active">
-          <p class="step-title">${detail.title}</p>
-          <p class="step-prompt">${detail.prompt}</p>
-          <div class="step-grid">
-            <div class="field">
-              <label for="longAnswer">${detail.label}</label>
-              <input id="longAnswer" inputmode="numeric" value="${longReadyForNext ? detail.answer : ""}" onkeydown="handleLongAnswerKey(event)" ${longReadyForNext ? "disabled" : ""}>
-            </div>
-          </div>
-          <div class="step-actions">
-            <button class="primary" id="longMainButton" type="button" onclick="handleLongMainAction()">${buttonText}</button>
-          </div>
-        </div>
-      `;
-      if (longReadyForNext) document.getElementById("longMainButton").focus();
-      else document.getElementById("longAnswer").focus();
-    }
-
     function handleLongMainAction() {
       if (longReadyForNext) advanceLongPart();
       else checkLongStep();
     }
 
+    function syncLongAnswer(source) {
+      const boxes = [...document.querySelectorAll('[data-board-digit]')];
+      if (source.matches('[data-board-digit]')) {
+        document.getElementById("longAnswer").value = boxes.map(box => box.value).join("");
+        const next = boxes[Number(source.dataset.boardDigit) + 1];
+        if (source.value.length === 1 && next) next.focus({ preventScroll: true });
+      } else {
+        boxes.forEach((box, index) => { box.value = source.value[index] || ""; });
+      }
+    }
+
     function handleLongAnswerKey(event) {
+      if (event.key === "Backspace" && event.target.matches('[data-board-digit]') && event.target.value === "") {
+        const previous = document.querySelector(`[data-board-digit="${Number(event.target.dataset.boardDigit) - 1}"]`);
+        if (previous) { event.preventDefault(); previous.focus({ preventScroll: true }); }
+      }
       if (event.key !== "Enter") return;
       event.preventDefault();
       handleLongMainAction();
     }
 
     function checkLongStep() {
+      if (!longProblem || !longProblem.steps[longStepIndex]) return;
       const active = longProblem.steps[longStepIndex];
       const feedback = document.getElementById("longFeedback");
       const part = currentLongPart();
@@ -1138,7 +436,7 @@
     }
 
     function advanceLongPart() {
-      if (!longProblem) return;
+      if (!longProblem || !longProblem.steps[longStepIndex]) return;
       const parts = longPartsForStep(longProblem.steps[longStepIndex]);
       if (longPartIndex < parts.length - 1) {
         longPartIndex += 1;
@@ -1147,7 +445,10 @@
         longPartIndex = 0;
       }
       longReadyForNext = false;
-      document.getElementById("longFeedback").textContent = "";
+      const feedback = document.getElementById("longFeedback");
+      feedback.textContent = longProblem.steps[longStepIndex] && currentLongPart() === "divide" && longStepIndex > 0
+        ? `${longProblem.steps[longStepIndex - 1].bringDown} brought down. Now divide ${longProblem.steps[longStepIndex].partial}.` : "";
+      feedback.className = "feedback good";
       renderLongDivision();
     }
 
@@ -1163,6 +464,8 @@
       feedback.className = "feedback";
 
       if (parsed.error) {
+        shortProblem = null;
+        document.getElementById("shortProblemHeading").textContent = "Choose a division problem";
         board.innerHTML = "";
         feedback.textContent = parsed.error;
         feedback.classList.add("bad");
@@ -1170,20 +473,21 @@
       }
 
       shortProblem = parsed;
+      document.getElementById("shortProblemHeading").textContent = `${parsed.dividend} ÷ ${parsed.divisor}`;
       const digits = String(parsed.dividend).split("");
       board.innerHTML = `
         <div class="short-grid">
           <div class="divisor">${parsed.divisor}</div>
           <div class="short-house">
             <div class="short-quotient" id="shortQuotient">
-              ${digits.map((_, index) => `<input class="q-box" id="sq-${index}" inputmode="numeric" maxlength="1">`).join("")}
+              ${digits.map((_, index) => `<input class="q-box" id="sq-${index}" aria-label="${placeLabel(index, digits.length)} quotient digit" inputmode="numeric" maxlength="1">`).join("")}
               <span style="font-size:1.1rem; align-self:center;">rem.</span>
-              <input class="q-box" id="shortRemainder" inputmode="numeric" maxlength="2">
+              <input class="q-box" id="shortRemainder" aria-label="Final remainder" inputmode="numeric" maxlength="2">
             </div>
             <div class="short-dividend">
               ${digits.map((digit, index) => `
                 <div class="short-digit">
-                  ${index > 0 ? `<input class="carry" id="carry-${index}" inputmode="numeric" maxlength="2">` : ""}
+                  ${index > 0 ? `<input class="carry" id="carry-${index}" aria-label="Remainder carried into ${placeLabel(index, digits.length)}" inputmode="numeric" maxlength="2">` : ""}
                   ${digit}
                 </div>
               `).join("")}
@@ -1191,7 +495,6 @@
           </div>
         </div>
       `;
-      document.getElementById("sq-0").focus();
     }
 
     function shortWorking() {
@@ -1237,8 +540,9 @@
 
     function revealShortDivision() {
       if (!shortProblem) setupShortDivision();
+      if (!shortProblem) return;
       const correct = shortWorking();
-      const qDigits = correct.quotient.split("");
+      const qDigits = correct.quotient.padStart(String(shortProblem.dividend).length, ' ').split("");
       document.querySelectorAll("#shortQuotient .q-box").forEach((input, index) => {
         if (input.id !== "shortRemainder") input.value = qDigits[index] || "";
       });
@@ -1354,14 +658,17 @@
     }
 
     window.addEventListener("load", () => {
+      initPractice();
       setupLongDivision();
       setupShortDivision();
       switchTab("long");
       initCanvas();
+      new ResizeObserver(drawBringDownArrows).observe(document.getElementById("longBoard"));
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./sw.js").catch(() => {});
       }
     });
   </script>
+  <script src="./board.js"></script>
 </body>
 </html>

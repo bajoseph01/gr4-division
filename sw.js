@@ -1,7 +1,9 @@
-const CACHE_NAME = "jogo-gr4-division-v10";
+const CACHE_NAME = "jogo-gr4-division-v24";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
+  "./styles.css",
+  "./board.js",
   "./DivisionVocab.html",
   "./manifest.json",
   "./icon-192x192.png",
@@ -11,9 +13,7 @@ const ASSETS_TO_CACHE = [
 
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(ASSETS_TO_CACHE))
-      .then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS_TO_CACHE)).then(() => self.skipWaiting())
   );
 });
 
@@ -30,12 +30,9 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
-      return fetch(event.request).catch(() => {
-        if (event.request.mode === "navigate") return caches.match("./index.html");
-        throw new Error("Offline asset not cached");
-      });
-    })
+    caches.match(event.request).then(response => response || fetch(event.request).catch(error => {
+      if (event.request.mode === "navigate") return caches.match("./index.html");
+      throw error;
+    }))
   );
 });

@@ -1,0 +1,29 @@
+{
+  "checked": "2026-11-07",
+  "browser": "Windows Edge via shared Playwright",
+  "checks": [
+    "default screen and visible mode controls",
+    "five practice levels advance only after completion and begin with two-digit exact division",
+    "120,012 division calculations including zero quotient digits",
+    "all long samples and boundary problems complete correctly",
+    "wrong answers do not advance; keyboard Check and Next work",
+    "both division signs accepted; invalid input clears stale state",
+    "board and side answers sync, validate and clear at the next round",
+    "whole sums can be completed on the board, including multi-digit answers",
+    "short division samples and leading quotient spaces",
+    "teacher settings and all sample buttons remain available",
+    "approved partial state colours and no future answers",
+    "desktop layout, digit alignment and arrow geometry",
+    "ipad-landscape layout, digit alignment and arrow geometry",
+    "ipad-portrait layout, digit alignment and arrow geometry",
+    "mobile layout, digit alignment and arrow geometry",
+    "completed remainder layout and reset",
+    "scratchpad drawing, undo, redo and clear",
+    "touch answer and reveal controls",
+    "offline cache includes V2 stylesheet and board script",
+    "opens directly from local file",
+    "no runtime errors or external app requests"
+  ],
+  "errors": [],
+  "external": []
+}
