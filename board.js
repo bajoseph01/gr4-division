@@ -132,7 +132,7 @@ function renderLongDivision() {
       ${renderWorkingLines()}`;
     // Avoid a touch keyboard opening itself on iPad; retain focus after keyboard answers.
     if (longReadyForNext) document.getElementById('longMainButton').focus({ preventScroll: true });
-    else if (keepKeyboardFocus) document.getElementById(boardEntryPreferred ? 'boardAnswer' : 'longAnswer').focus({ preventScroll: true });
+    else if (keepKeyboardFocus) document.getElementById(boardEntryPreferred || document.getElementById('longPanel').classList.contains('help-collapsed') ? 'boardAnswer' : 'longAnswer').focus({ preventScroll: true });
   }
   requestAnimationFrame(drawBringDownArrows);
 }

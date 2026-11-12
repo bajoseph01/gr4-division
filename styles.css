@@ -166,3 +166,19 @@ canvas { width: 100%; height: 320px; border: 2px solid var(--line); border-radiu
   .lesson-tools button { font-size: 18px; padding-inline: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+/* Keep board actions available when the teaching explanations are collapsed. */
+.long-heading-row { position: relative; }
+#lessonToggle { position: absolute; right: 0; top: 0; font-size: var(--text-small); }
+@media (max-width: 520px) {
+  .long-heading-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+  .long-heading-row .problem-heading { margin-bottom: 0; }
+  #lessonToggle { position: static; }
+}
+.help-collapsed .long-work-area { grid-template-columns: minmax(0, 1fr); }
+.help-collapsed .lesson-column { position: static; }
+.help-collapsed #longStepArea > :not(.step-actions):not(.completion),
+.help-collapsed .lesson-card:has(#longStepArea:empty) { display: none; }
+.help-collapsed .lesson-card { padding: 12px; }
+.help-collapsed .step-actions { margin-top: 0; }
+.help-collapsed .step-actions .primary { min-height: 48px; font-size: 24px; }

@@ -1,4 +1,4 @@
-const CACHE_NAME = "jogo-gr4-division-v24";
+const CACHE_NAME = "jogo-gr4-division-v25";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",

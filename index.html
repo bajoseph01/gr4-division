@@ -54,7 +54,10 @@
         </div>
 
         <section id="longPanel">
-          <h2 class="problem-heading"><span id="longProblemHeading">48 ÷ 2</span></h2>
+          <div class="long-heading-row">
+            <h2 class="problem-heading"><span id="longProblemHeading">48 ÷ 2</span></h2>
+            <button id="lessonToggle" type="button" aria-expanded="true" aria-controls="longStepArea" onclick="toggleLessonHelp()">Hide step help</button>
+          </div>
           <div class="work-area long-work-area">
             <div class="board-column">
               <div class="practice-controls">
@@ -182,6 +185,14 @@
       if (dividend < 0 || divisor <= 0) return { error: "The dividend must be 0 or more, and the divisor must be bigger than 0." };
       if (divisor > 12) return { error: "For Grade 4 practice, keep the divisor 12 or less." };
       return { dividend, divisor };
+    }
+
+    function toggleLessonHelp() {
+      const collapsed = document.getElementById("longPanel").classList.toggle("help-collapsed");
+      const button = document.getElementById("lessonToggle");
+      button.setAttribute("aria-expanded", String(!collapsed));
+      button.textContent = collapsed ? "Show step help" : "Hide step help";
+      requestAnimationFrame(drawBringDownArrows);
     }
 
     function toggleTeacherDrawer() {

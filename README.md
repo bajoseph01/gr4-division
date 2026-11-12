@@ -12,6 +12,8 @@ The **Practice level** selector follows five stages: two-digit exact/no carrying
 
 Answer each **Divide → Multiply → Subtract → Bring down** prompt, press **Check**, then **Next**. Enter also checks/advances. **Reveal** fills only the current step; **Reset** starts the problem again. Completed working remains visible. **Working in words** expands the written steps. **Scratchpad** provides pencil, eraser, undo, redo and clear.
 
+Use **Hide step help** to collapse the teaching explanations and give the board the full width. **Show step help** restores them. Check/Next, Reveal, Reset, feedback and tools stay available below the board; entered answers and progress are preserved.
+
 For **every step**, type in the outlined `?` boxes directly on the board **or** in the side panel. The next boxes appear in the correct position: quotient above the line, product after the minus sign, remainder below the subtraction rule, then the brought-down digit beside it. Multi-digit answers have one box per digit; typing moves to the next box. Both locations stay in sync and use Check/Enter validation. After Next, focus stays on the board if that was the learner's chosen input. Only the current answer is editable; completed working and future steps stay locked.
 
 Colours follow division rounds: orange, green, yellow, blue (then lavender for a fifth round; the sequence repeats for longer problems). The divisor is coral and the final answer's remainder is purple. A brought-down digit keeps its source colour; an outline and named step also show the current task. Zero quotient digits and zero remainders are shown explicitly.
